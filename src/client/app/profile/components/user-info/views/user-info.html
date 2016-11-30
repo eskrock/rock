@@ -1,0 +1,11 @@
+<div ng-switch on="mode">
+  <div ng-switch-when="edit">
+    <div ng-include="'app/profile/components/user-info/views/user-info.edit.html'"></div>
+  </div>
+  <div ng-switch-when="new">
+    <div ng-include="'app/profile/components/user-info/views/user-info.edit.html'"></div>
+  </div>
+  <div ng-switch-default>
+    <div ng-include="'app/profile/components/user-info/views/user-info.view.html'"></div>
+  </div>
+</div>

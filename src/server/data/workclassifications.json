@@ -1,0 +1,20 @@
+[
+  {
+    "id": "1",
+    "construction_type": "Heavy",
+    "contract_number": "ACE-CE-4125",
+    "classification": "Heavy",
+  	"hourly_rate": "81.10",
+  	"fringes": "48.10",
+  	"notes": "a-Paid Vacation- Employees who have been employed for one year but less than three years receive 1 week of paid vacation; employees who have been employed three years but less than ten years receive 2 weeks of paid vacation;"
+  },
+  {
+    "id": "2",
+    "construction_type": "Heavy",
+    "contract_number": "ACE-CE-4125",
+    "classification": "Building",
+  	"hourly_rate": "33.35",
+  	"fringes": "23.00",
+  	"notes": ""
+  }
+]

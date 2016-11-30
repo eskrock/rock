@@ -1,0 +1,136 @@
+<div class="usa-grid">
+  <h1>All payrolls</h1>
+  <p>
+    Find payrolls you and your subcontractors have filed by week ending date, contract number and name.
+  </p>
+
+  <div class="table-filter-grid">
+    <div class="table-filter">
+      <div class="filter-title"><strong>Filter</strong></div>
+      <div class="filter-group">
+        <span>Date rage:</span>
+        <input type="text" placeholder="MM/DD/YY" ng-model="fromDate">
+      </div>
+      <div class="filter-group attached">
+        <span>to</span>
+        <input type="text" placeholder="MM/DD/YY" ng-model="toDate">
+      </div>
+      <div class="filter-group">
+        <select name="status" id="status" ng-model="status" aria-label="status">
+          <option value="pending">Actionable statuses</option>
+          <option value="all">All statuses</option>
+          <option value="sent">Sent</option>
+          <option value="received">Received</option>
+          <option value="flagged">Flagged</option>
+          <option value="delinquent">Delinquent</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <select name="contract-number" id="contract-number" ng-model="contract" aria-label="contract number">
+          <option value="all">All contracts</option>
+          <option ng-repeat="a in activities | unique:'payroll.contract.num'" value="{{a.payroll.contract.num}}">{{a.payroll.contract.num}}</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <select name="contractor" id="contractor" ng-model="org" aria-label="contractor">
+          <option value="all">All contractors</option>
+          <option ng-repeat="a in activities | unique:'payroll.organization.id'" value="{{a.payroll.organization.id}}">{{a.payroll.organization.name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <h3>Showing all payrolls.</h3>
+  <div class="usa-width-one-whole">
+    <div id="payrolls">
+    <table class="usa-table-borderless zebra cpa-table">
+      <thead>
+        <tr>
+          <th scope="col">
+            <a class="sort" data-sort="weekend" href="#" ng-click="setSortCol('week_end')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Week end date
+            </a>
+          </th>
+          <th scope="col">
+            <a class="sort" data-sort="contract-number"  href="#" ng-click="setSortCol('contract')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Contract
+            </a>
+          </th>
+          <th scope="col">
+            <a class="sort" data-sort="contractor"  href="#" ng-click="setSortCol('org')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Contractor
+            </a>
+            </th>
+          <th scope="col">
+            <a class="sort" data-sort="payroll-number"  href="#" ng-click="setSortCol('payroll_num')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Payroll #
+            </a>
+          </th>
+          <th scope="col">
+            <a class="sort" data-sort="status"  href="#" ng-click="setSortCol('status')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Status
+            </a>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody class="list">
+        <tr ng-show="!filteredItems.length">
+          <td colspan="7">No payrolls found</td>
+        </tr>
+        <tr ng-repeat="item in filteredItems  = (activities | orderBy:sortCol:sortDesc | filter:listFilter)">
+          <td class="weekend">{{item.payroll.week_end | date:'longDate' }}</td>
+          <td class="contract-number"><a href="#" ui-sref="contract.view({id: '{{item.payroll.contract.num}}'})">{{item.payroll.contract.num}}</a></td>
+          <td class="contractor"><a href="#" ui-sref="organization.profile({id: item.payroll.organization.id})">{{item.payroll.organization.name}}</a></td>
+          <td class="payroll-number"><a ng-click="goToPayrollIfExtant(item)">{{item.payroll.number}}</a></td>
+          <td class="status" ng-switch="item.status">
+            <a ng-click="goToPayrollIfExtant(item)">
+              <div ng-switch-when="new">
+                <i class="fa fa-bolt" aria-hidden="false"></i>
+                <span><strong>Draft</strong></span>
+              </div>
+              <div ng-switch-when="flagged">
+                <div class="tooltip">
+                <div ng-if="item.payroll.deduction_flags[0]">
+                  <span class="tooltiptext"><b>Comment</b>: {{item.payroll.deduction_flags[0].comments}}</span>
+                </div>
+                <i class="fa fa-flag" aria-hidden="false"></i>
+                <span><strong>Flagged</strong></span>
+                </div>
+              </div>
+              <div ng-switch-when="sent">
+                <i class="fa fa-check" aria-hidden="false"></i>
+                <span><strong>Sent</strong></span>
+              </div>
+              <div ng-switch-when="received">
+                <i class="fa fa-envelope" aria-hidden="false"></i>
+                <span><strong>Received</strong></span>
+              </div>
+              <div ng-switch-when="not-received">
+                <i class="fa fa-times" aria-hidden="false"></i>
+                <span><strong>Delinquent</strong></span>
+              </div>
+              <div ng-switch-default>
+                <i class="fa fa-check" aria-hidden="false"></i>
+                <span><strong>Ready to send</strong></span>
+              </div>
+              <span ng-show="isNewItem(item)" class="usa-label status-new"> New </span>
+            </a>
+          </td>
+          <td ng-show="item.status == 'received' || item.status == 'certified' || item.status == 'complete'">
+            <input id="select-{{item.payroll.number}}" type="checkbox" name="select" value="{{item.payroll.id}}" ng-model="item.payroll.selected" >
+            <label for="select-{{item.payroll.number}}"></label>
+          </td>
+          <td ng-hide="item.status == 'received' || item.status == 'certified' || item.status == 'complete'">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+</div>

@@ -1,0 +1,63 @@
+<div class="usa-grid">
+    <div class="usa-width-one-whole">
+        <h1>Manage my organization's users</h1>
+        <div id="users">
+            <!-- user creation not allowed
+            <button ng-if="!userCreate" class="usa-button" ng-click="toggleCreate()">Create New User</button>
+            <form ng-if="userCreate">
+                Email: <input type="email" ng-model="new_user.email" /> <br />
+                Role: <select ng-model="new_user.role">
+                    <option ng-repeat="opt in ['co','admin','contractor']">{{opt}}</option>
+                </select> <br />
+                <a class="usa-button" ng-click="inviteUser(new_user)">Invite User</a>
+            </form>
+            -->
+            <table class="usa-table-borderless zebra">
+                <thead>
+                    <tr>
+                        <th scope="col">
+
+                                <i class="fa icon-uniF0DC" aria-hidden="false"></i>Email
+                        </th>
+
+                        <th scope="col">
+                                <i class="fa icon-uniF0DC" aria-hidden="false"></i> First Name
+                            </a>
+                        </th>
+
+                        <th scope="col">
+                                <i class="fa icon-uniF0DC" aria-hidden="false"></i> Last Name
+                        </th>
+
+                        <th scope="col">
+                                <i class="fa icon-uniF0DC" aria-hidden="false"></i> Role
+                        </th>
+
+                        <th scope="col">
+                                <i class="fa icon-uniF0DC" aria-hidden="false"></i> Save
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody class="list">
+
+                    <tr ng-repeat="c in users">
+                        <td>{{c.email}}</td>
+                        <td>{{c.first_name}}</td>
+                        <td>{{c.last_name}}</td>
+                        <td>
+                            <select ng-model="c.access">
+                                <option ng-repeat="opt in ['user','submitter','administrator']" value="{{opt}}">{{opt}}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <a class="usa-button" ng-click="saveRow(c)">Update</a>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+</div>

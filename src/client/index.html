@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html ng-app="app">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title ng-bind="title"></title>
+    <base href="/">
+    <style>
+        /* This helps the ng-show/ng-hide animations start at the right place. */
+        /* Since Angular has this but needs to load, this gives us the class early. */
+        .ng-hide { display: none!important; }
+    </style>
+
+    <!-- build:css styles/lib.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/toastr/toastr.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:css styles/app.css-->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="/.tmp/styles.css">
+    <link rel="stylesheet" href="/.tmp/font-awesome.css">
+    <!-- endinject -->
+    <!-- endbuild -->
+</head>
+<body>
+    <div>
+        <div ng-include="'app/layout/shell/views/shell.html'"></div>
+        <div id="splash-page" ng-show="false">
+            <div class="page-splash">
+                <div class="page-splash-message">
+                    Certified Payroll
+                </div>
+                <div class="progress progress-striped active page-progress-bar">
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- build:js js/lib.js -->
+    <!-- bower:js -->
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/toastr/toastr.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="/bower_components/satellizer/dist/satellizer.js"></script>
+    <script src="/bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="/bower_components/SHA-1/sha1.js"></script>
+    <script src="/bower_components/angulartics/src/angulartics.js"></script>
+    <script src="/bower_components/angulartics-google-analytics/lib/angulartics-ga.js"></script>
+    <script src="/bower_components/typeahead.js/dist/typeahead.bundle.js"></script>
+    <script src="/bower_components/angular-typeahead/dist/angular-typeahead.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- build:js js/app.js-->
+    <!-- inject:js -->
+    <script src="/src/client/vendors/ga/analytics.js"></script>
+    <script src="/src/client/app/app.module.js"></script>
+    <script src="/src/client/app/admin/admin.module.js"></script>
+    <script src="/src/client/app/blocks/diagnostics/diagnostics.module.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.module.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.module.js"></script>
+    <script src="/src/client/app/blocks/router/router.module.js"></script>
+    <script src="/src/client/app/blocks/utils/utils.module.js"></script>
+    <script src="/src/client/app/contract/contract.module.js"></script>
+    <script src="/src/client/app/core/core.module.js"></script>
+    <script src="/src/client/app/dashboard/dashboard.module.js"></script>
+    <script src="/src/client/app/layout/layout.module.js"></script>
+    <script src="/src/client/app/organizations/organization.module.js"></script>
+    <script src="/src/client/app/payroll/payroll.module.js"></script>
+    <script src="/src/client/app/profile/profile.module.js"></script>
+    <script src="/src/client/app/widgets/widgets.module.js"></script>
+    <script src="/src/client/app/admin/admin.route.js"></script>
+    <script src="/src/client/app/admin/components/user-dashboard/user-dashboard.directive.js"></script>
+    <script src="/src/client/app/admin/services/resource-service.js"></script>
+    <script src="/src/client/app/blocks/diagnostics/diagnostics.decorator.js"></script>
+    <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.js"></script>
+    <script src="/src/client/app/blocks/router/router-helper.provider.js"></script>
+    <script src="/src/client/app/blocks/utils/utils.js"></script>
+    <script src="/src/client/app/contract/components/contract-dashboard/contract-dashboard.directive.js"></script>
+    <script src="/src/client/app/contract/components/contract-view/contract-view.directive.js"></script>
+    <script src="/src/client/app/contract/components/project-info/project-info.directive.js"></script>
+    <script src="/src/client/app/contract/components/subcontractors-manager/subcontractors-manager.directive.js"></script>
+    <script src="/src/client/app/contract/components/work-classifications-manager/work-classifications-manager.directive.js"></script>
+    <script src="/src/client/app/contract/contract.route.js"></script>
+    <script src="/src/client/app/contract/models/contract.model.js"></script>
+    <script src="/src/client/app/contract/models/organization.model.js"></script>
+    <script src="/src/client/app/contract/models/subcontractor.model.js"></script>
+    <script src="/src/client/app/contract/models/workclassification.model.js"></script>
+    <script src="/src/client/app/contract/services/resource-service.js"></script>
+    <script src="/src/client/app/core/components/agreements/agreements.directive.js"></script>
+    <script src="/src/client/app/core/components/has-permission/has-permission.directive.js"></script>
+    <script src="/src/client/app/core/components/login/login.directive.js"></script>
+    <script src="/src/client/app/core/components/privacy/privacy.directive.js"></script>
+    <script src="/src/client/app/core/config.js"></script>
+    <script src="/src/client/app/core/constants.js"></script>
+    <script src="/src/client/app/core/core.route.js"></script>
+    <script src="/src/client/app/core/filters/api-base-url.filter.js"></script>
+    <script src="/src/client/app/core/filters/str.filter.js"></script>
+    <script src="/src/client/app/core/filters/tel.filter.js"></script>
+    <script src="/src/client/app/core/filters/title-case.filter.js"></script>
+    <script src="/src/client/app/core/services/dataservice.js"></script>
+    <script src="/src/client/app/core/services/permissions/permissions.js"></script>
+    <script src="/src/client/app/core/services/resource-service.js"></script>
+    <script src="/src/client/app/dashboard/components/dashboard/dashboard.controller.js"></script>
+    <script src="/src/client/app/dashboard/dashboard.route.js"></script>
+    <script src="/src/client/app/dashboard/services/dashboard.service.js"></script>
+    <script src="/src/client/app/layout/footer/footer.controller.js"></script>
+    <script src="/src/client/app/layout/header/header.controller.js"></script>
+    <script src="/src/client/app/layout/shell/shell.controller.js"></script>
+    <script src="/src/client/app/organizations/components/organization-payrolls/organization-payrolls.controller.js"></script>
+    <script src="/src/client/app/organizations/components/organization-profile/organization-profile.directive.js"></script>
+    <script src="/src/client/app/organizations/organization.route.js"></script>
+    <script src="/src/client/app/payroll/components/duplicate-payroll/duplicate-payroll.directive.js"></script>
+    <script src="/src/client/app/payroll/components/flag-issue/flag-issue.directive.js"></script>
+    <script src="/src/client/app/payroll/components/new-payroll/new-payroll.directive.js"></script>
+    <script src="/src/client/app/payroll/components/no-work/no-payroll.directive.js"></script>
+    <script src="/src/client/app/payroll/components/review-deductions/review-deductions.directive.js"></script>
+    <script src="/src/client/app/payroll/components/review-payroll/review-payroll.directive.js"></script>
+    <script src="/src/client/app/payroll/components/sign-certify/sign-certify.directive.js"></script>
+    <script src="/src/client/app/payroll/components/worker-detail/other-deduction.directive.js"></script>
+    <script src="/src/client/app/payroll/components/worker-detail/worked-hours.directive.js"></script>
+    <script src="/src/client/app/payroll/components/worker-detail/worker-detail.directive.js"></script>
+    <script src="/src/client/app/payroll/models/certification.model.js"></script>
+    <script src="/src/client/app/payroll/models/feedback.model.js"></script>
+    <script src="/src/client/app/payroll/models/flag-issue.model.js"></script>
+    <script src="/src/client/app/payroll/models/other_deductions.model.js"></script>
+    <script src="/src/client/app/payroll/models/payroll.model.js"></script>
+    <script src="/src/client/app/payroll/models/worked_hours.model.js"></script>
+    <script src="/src/client/app/payroll/models/worker.model.js"></script>
+    <script src="/src/client/app/payroll/payroll.route.js"></script>
+    <script src="/src/client/app/payroll/services/payroll.service.js"></script>
+    <script src="/src/client/app/profile/components/profile-manager/profile-manager.directive.js"></script>
+    <script src="/src/client/app/profile/components/profile-view/profile-view.directive.js"></script>
+    <script src="/src/client/app/profile/components/user-info/user-info.directive.js"></script>
+    <script src="/src/client/app/profile/profile.route.js"></script>
+    <script src="/src/client/app/profile/services/user-service.js"></script>
+    <script src="/node_modules/uswds/dist/js/uswds.min.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:templates:js -->
+    <!-- endinject -->
+
+    <!-- endbuild -->
+</body>
+</html>

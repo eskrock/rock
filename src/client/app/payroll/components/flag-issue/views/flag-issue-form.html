@@ -1,0 +1,24 @@
+<h2>Comments</h2>
+
+<p ng-if="flagType == 'deductions'">For example: Needs supporting documentation.</p>
+<p ng-if="flagType == 'hours-and-earnings'">For example: The standard rate should be greater than the prevailing wage $24.35.</p>
+
+<form name="issueForm" novalidate ng-submit="issueForm.$valid && save($event)">
+
+  <fieldset>
+    <legend></legend>
+      <div ng-class="{ 'usa-input-error': issueForm.$submitted && issueForm.comments.$invalid }">
+        <label  for="comments"></label>
+        <div ng-messages="issueForm.comments.$error"  ng-if="issueForm.$submitted" role="alert">
+            <span class="usa-input-error-message" ng-if="issueForm.comments.$error.required">Please enter a comment</span>
+        </div>
+        <textarea ng-readonly="mode !== 'edit'" id="comments" name="comments" ng-model="flag.comments" required="" rows="4" cols="50"></textarea>
+      </div>
+  </fieldset>
+
+  <div class="button_wrapper">
+    <button ng-if="mode === 'edit'" class="usa-button" type="submit" style="display: inline-block;">Flag</button>
+    <button class="usa-button usa-button-outline" type="button" ng-click="goBack()">Go back</button>
+  </div>
+
+</form>

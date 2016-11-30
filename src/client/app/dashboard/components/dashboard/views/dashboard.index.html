@@ -1,0 +1,166 @@
+<h1>Dashboard</h1>
+  <p has-permission='contractor'>
+    <a class="usa-button" href="#" ui-sref="payroll-new">Create new payroll record</a><br>
+    <small>No work done this week? You'll still need to file a no-work payroll.</small>
+  </p>
+  <p has-permission='co'>Welcome to your dashboard. This is where you can approve or flag submitted payrolls. Use the filter options as desired.</p>
+
+  <div class="table-filter-grid">
+    <div class="table-filter">
+      <div class="filter-title"><strong>Filter</strong></div>
+      <div class="filter-group">
+        <span>Date range:</span>
+        <input type="text" placeholder="MM/DD/YY" ng-model="$parent.$parent.fromDate">
+      </div>
+      <div class="filter-group attached">
+        <span>to</span>
+        <input type="text" placeholder="MM/DD/YY" ng-model="$parent.$parent.toDate">
+      </div>
+      <div class="filter-group">
+        <select name="status" id="status" ng-model="$parent.$parent.status" aria-label="status">
+          <option value="pending">Actionable statuses</option>
+          <option value="all">All statuses</option>
+          <option value="sent">Sent</option>
+          <option value="received">Received</option>
+          <option value="not-received">Not Received</option>
+          <option value="flagged">Flagged</option>
+          <option value="delinquent">Delinquent</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <select name="contract-number" id="contract-number" ng-model="$parent.$parent.contract" aria-label="contract number">
+          <option value="all">All contracts</option>
+          <option ng-repeat="a in activities | unique:'payroll.contract.num'" value="{{a.payroll.contract.num}}">{{a.payroll.contract.num}}</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <select name="contractor" id="contractor" ng-model="$parent.$parent.org" aria-label="contractor">
+          <option value="all">All contractors</option>
+          <option ng-repeat="a in activities | unique:'payroll.organization.id'" value="{{a.payroll.organization.id}}">{{a.payroll.organization.name}}</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="usa-width-one-whole">
+    <div id="payrolls">
+    <table class="usa-table-borderless zebra cpa-table">
+      <thead>
+        <tr>
+          <th scope="col">
+            <a class="sort" data-sort="weekend" href="#" ng-click="setSortCol('week_end')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Week end date
+            </a>
+          </th>
+          <th scope="col">
+            <a class="sort" data-sort="contract-number"  href="#" ng-click="setSortCol('contract')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Contract
+            </a>
+          </th>
+          <th scope="col">
+            <a class="sort" data-sort="contractor"  href="#" ng-click="setSortCol('org')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Contractor
+            </a>
+            </th>
+          <th scope="col">
+            <a class="sort" data-sort="payroll-number"  href="#" ng-click="setSortCol('payroll_num')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Payroll #
+            </a>
+          </th>
+          <th scope="col">
+            <a class="sort" data-sort="status"  href="#" ng-click="setSortCol('status')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Status
+            </a>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody class="list">
+        <tr ng-show="!filteredItems">
+          <td colspan="6">No payrolls found</td>
+        </tr>
+        <tr ng-repeat="item in filteredItems  = (activities | orderBy:sortCol:sortDesc | filter:listFilter)">
+          <h4>{{item}}</h4>
+          <td class="weekend">{{item.payroll.week_end | date:'longDate' }}</td>
+          <td class="contract-number"><a href="#" ui-sref="contract.view({id: '{{item.payroll.contract.num}}'})">{{item.payroll.contract.num}}</a></td>
+          <td class="contractor"><a href="#" ui-sref="organization.profile({id: item.payroll.organization.id})">{{item.payroll.organization.name}}</a></td>
+          <td class="payroll-number"><a href="#" ng-click="gotoReview(item)">{{item.payroll.number}}</a></td>
+          <td class="status" ng-switch="item.status">
+              <div ng-switch-when="new">
+                <a href="#" ng-click="gotoReview(item)">
+                <i class="fa fa-bolt" aria-hidden="false"></i>
+                <span><strong>Draft</strong></span>
+                </a>
+              </div>
+              <div ng-switch-when="flagged">
+                <a href="#" ng-click="gotoReview(item)">
+
+                <div class="tooltip">
+
+                  <div class="tooltiptext">
+                    <span ng-repeat="c in getComments(item.payroll) | orderBy: 'createdAt':true ">
+                      <p style="padding:0px;margin:0px;border-bottom:1px dotted grey;">
+                        {{c.comments | strLimit: 250 }}
+                      </p>
+                    </span>
+                  </div>
+
+                <i class="fa fa-flag" aria-hidden="false"></i>
+                <span><strong>Flagged</strong></span>
+                </div>
+                </a>
+              </div>
+              <div ng-switch-when="sent">
+                <a href="#" ng-click="gotoReview(item)">
+                  <i class="fa fa-check" aria-hidden="false"></i>
+                  <span><strong>Sent</strong></span>
+                </a>
+              </div>
+              <div ng-switch-when="received">
+                <a href="#" ng-click="gotoReview(item)">
+                  <i class="fa fa-envelope" aria-hidden="false"></i>
+                  <span><strong>Received</strong></span>
+                </a>
+              </div>
+              <div ng-switch-when="not-received">
+                <i class="fa fa-envelope" aria-hidden="false"></i>
+                <span><strong>Not Received</strong></span>
+              </div>
+              <div ng-switch-when="delinquent">
+                <i class="fa fa-times" aria-hidden="false"></i>
+                <span><strong>Delinquent</strong></span>
+              </div>
+              <div ng-switch-default>
+                <a href="#" ng-click="gotoReview(item)">
+                  <i class="fa fa-check" aria-hidden="false"></i>
+                  <span><strong>Ready to send</strong></span>
+                </a>
+              </div>
+              <span ng-show="isNewItem(item)" class="usa-label status-new"> New </span>
+          </td>
+          <td ng-show="(item.status == 'received' || item.status == 'certified' || item.status == 'complete') && item.payroll.id">
+            <input id="select-{{item.payroll.number}}" type="checkbox" name="select" value="{{item.payroll.id}}" ng-model="item.payroll.selected" >
+            <label for="select-{{item.payroll.number}}"></label>
+          </td>
+          <td ng-hide="item.status == 'received' || item.status == 'certified' || item.status == 'complete'">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div has-permission='co'>
+      <p class="usa-alert-text">Click to approve selected payrolls.</p>
+      <button ng-click='reviewPayrolls()'>Approve selected payrolls</button>
+    </div>
+
+    <div has-permission='contractor'>
+      <p class="usa-alert-text">Click to submit selected payrolls.</p>
+      <button ng-click='confirmPayrolls()'>Send payrolls</button>
+    </div>
+  </div>
+  </div>

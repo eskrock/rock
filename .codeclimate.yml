@@ -1,0 +1,21 @@
+---
+engines:
+  jshint:
+    enabled: false
+  # eslint:
+  #   enabled: true
+  #   channel: "eslint-2"
+  #   config:
+  #     config: .eslintrc
+  fixme:
+    enabled: true
+ratings:
+  paths:
+  - "**.inc"
+  - "**.js"
+  - "**.jsx"
+exclude_paths:
+- node_modules/
+- build/
+- bower_components
+- report

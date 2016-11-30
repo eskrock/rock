@@ -1,0 +1,17 @@
+<div ui-view class="usa-grid" has-permission='admin'>
+  <h1>Dashboard</h1>
+</div>
+
+<div class="usa-grid" has-permission='!admin'>
+  <div ng-switch on="mode">
+    <div ng-switch-when="confirm">
+      <div ng-include="'app/dashboard/components/dashboard/views/dashboard.confirmation.html'"></div>
+    </div>
+    <div ng-switch-when="complete">
+      <div ng-include="'app/dashboard/components/dashboard/views/dashboard.thanks.html'"></div>
+    </div>
+    <div ng-switch-default>
+      <div ng-include="'app/dashboard/components/dashboard/views/dashboard.index.html'"></div>
+    </div>
+  </div>
+</div>

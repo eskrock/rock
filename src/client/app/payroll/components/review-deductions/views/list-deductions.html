@@ -1,0 +1,46 @@
+<table class="usa-table-borderless zebra cpa-table">
+  <thead>
+    <tr>
+      <th scope="col">Last name</th>
+      <th scope="col">First name</th>
+      <th scope="col">ID #</th>
+      <th scope="col">Gross earnings: All projects</th>
+      <th scope="col">FICA</th>
+      <th scope="col">Withholding tax</th>
+      <th scope="col" style="width: 200px;">Other <a href="#"><i class="fa fa-paperclip" aria-hidden="false"></i></a></th>
+      <th scope="col">Total deductions</th>
+      <th scope="col">Net wages</th>
+      <th scope="col">Make changes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="detail in reviewData.pay_details">
+      <th scope="row">{{detail.first_name}}</th>
+      <td>{{detail.last_name}}</td>
+      <td>{{detail.worker_id}}</td>
+      <td>{{ getNetWagesPaid(detail) + detail.total_other | currency:"":2}}</td>
+      <td>{{detail.fica | currency:"":2}}</td>
+      <td>{{detail.taxwh | currency:"":2}}</td>
+      <td>
+          <p ng-repeat="other_deduction in detail.other_deductions" style="margin-top: 0">
+            <span>{{other_deduction.deduction | currency:"":2}}</span></br><span>{{other_deduction.explanation}}</span></br>
+            <a href="{{ '/payrolls/' + payroll.id + '/items/' + detail.id + '/attachments/' + attachment.file_name | apiBaseUrl }}" ng-repeat="attachment in other_deduction.attachments"><i class="fa fa-paperclip" aria-hidden="false"></i>{{attachment.original_name}}</a>
+          </p>
+      </td>
+      <td>{{detail.total_other | currency:"":2}}</td>
+      <td>{{ getNetWagesPaid(detail) | currency:"":2}}</td>
+      <td class="review-buttons">
+        <!-- Reviewer -->
+        <a ng-show="payrollUser.organization_id !== reviewData.organization_id && (reviewData.payroll_activities[0].status=='received' || reviewData.payroll_activities[0].status=='flagged')"
+            class="usa-button" ui-sref="payroll.edit.deductions-issues({ id: reviewData.id, item: detail.id, cnum: reviewData.contract.num, org: reviewData.organization_id  })">Flag</a>
+
+        <!-- Sender -->
+        <a ng-show="payrollUser.organization_id === reviewData.organization_id && (reviewData.payroll_activities[0].status=='sent' || reviewData.payroll_activities[0].status=='flagged')"
+            class="usa-button usa-button-outline" ui-sref="payroll.view.deductions-issues({ id: reviewData.id, item: detail.id, cnum: reviewData.contract.num, org: reviewData.organization_id  })">Flags</a>
+
+        <a ng-show="payrollUser.organization_id === reviewData.organization_id && (reviewData.payroll_activities[0].status=='new' || reviewData.payroll_activities[0].status=='flagged')"
+            class="usa-button usa-button-outline" ui-sref="payroll.edit.worker-detail2({ id: reviewData.id, item: detail.id, cnum: reviewData.contract.num, org: reviewData.organization_id })">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

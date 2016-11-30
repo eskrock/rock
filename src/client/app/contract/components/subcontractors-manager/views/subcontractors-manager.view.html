@@ -1,0 +1,20 @@
+<h3>Subcontractors on this contract</h3>
+<table class="usa-table-borderless zebar cpa-table">
+  <thead>
+    <tr>
+      <th scope="col">Company name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Start Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="s in subcontractors | orderBy: 'id'">
+      <td scope="row">{{s.organization.name}}</td>
+      <td>{{s.organization.email}}</td>
+      <td>{{s.organization.phone}}</td>
+      <td>{{s.start_date | date:'MMM d, y'}}</td>
+    </tr>
+  </tbody>
+</table>
+</br>

@@ -1,0 +1,8 @@
+<p>
+  Contractor: {{payrollDetails.organization.name}}<br>
+  Payroll #{{payrollDetails.number}}<br>
+  Week ending: {{ payrollDetails.week_end | date:'longDate'}}<br>
+  Project: {{payrollDetails.contract.title}}<br>
+  Contract # {{payrollDetails.contract.num | uppercase}}<br>
+  Received: {{ payrollDetails.payroll_activities[0].received | date:'longDate'}}
+</p>

@@ -1,0 +1,25 @@
+<hr/>
+<div style="margin-top: 3.5rem; font-size: 1.8rem; margin-bottom: 2rem;"><strong>Subcontractors on this contract</strong></div>
+<table class="usa-table-borderless zebra cpa-table">
+  <thead>
+    <tr>
+      <th scope="col">Assigned subcontractor</th>
+      <th scope="col">Point of contact</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+      <th scope="col">Projected start/end dates</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-if="subcontractors.length === 0">
+      <td scope="row" colspan="5">No subcontractors added</td>
+    </tr>
+    <tr ng-repeat="s in subcontractors | orderBy: 'id'">
+      <th scope="row">{{s.organization.name}}</th>
+      <td>{{s.organization.poc}}</td>
+      <td>{{s.organization.email}}</td>
+      <td>{{s.organization.phone}}</td>
+      <td>{{s.start_date | date:'MMM d, y'}} - {{s.end_date | date:'MMM d, y'}}</td>
+    </tr>
+  </tbody>
+</table>

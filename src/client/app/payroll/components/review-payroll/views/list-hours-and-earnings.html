@@ -1,0 +1,111 @@
+<a href="#"
+  ng-show="currentUser.organization_id === reviewData.organization_id &&
+        reviewData.payroll_activities[0].status === 'new'"
+  ui-sref="payroll.edit.worker-detail({id: reviewData.id, cnum: reviewData.contract.num, org: reviewData.organization_id})">
+  <i class="fa fa-plus" aria-hidden="false"></i>
+  Add Employee
+</a>
+<table class="usa-table-borderless zebra cpa-table cpa-table-large">
+  <thead>
+    <tr>
+      <th scope="col">Last name</th>
+      <th scope="col">First name</th>
+      <th scope="col">ID #</th>
+      <th scope="col" style="width: 145px;">Work classification</th>
+      <th class="col-hours" scope="col">
+          Hours by day/date <br>
+          <table class="review-hours-table">
+            <tbody>
+              <tr>
+                <td>S <td>M</td> <td>T</td> <td>W</td> <td>Th</td>  <td>F</td> <td>S</td>
+              </tr>
+              <tr>
+                <td ng-repeat="date in getWeekDates()">{{date}}</td>
+              </tr>
+            </tbody>
+          </table>
+      </th>
+      <th scope="col">Total hours</th>
+      <th scope="col">Rate</th>
+      <th scope="col">Fringes (cash)</th>
+      <th scope="col">Fringes (employer-paid)</th>
+      <th scope="col">Gross earnings:  Federal projects</th>
+      <th scope="col">Gross earnings: All projects</th>
+      <th scope="col">Make changes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="detail in reviewData.pay_details">
+      <th scope="row">{{detail.first_name}}</th>
+      <td>{{detail.last_name}}</td>
+      <td>{{detail.worker_id}}</td>
+      <td>{{detail.work_class}}</td>
+      <td>
+        <table class="review-hours-table">
+          <tbody>
+            <tr>
+              <td>&nbsp;</td>
+              <td>{{detail.reg1}}</td>
+              <td>{{detail.reg2}}</td>
+              <td>{{detail.reg3}}</td>
+              <td>{{detail.reg4}}</td>
+              <td>{{detail.reg5}}</td>
+              <td>{{detail.reg6}}</td>
+              <td>{{detail.reg7}}</td>
+            </tr>
+            <tr>
+              <td>OT</td>
+              <td>{{detail.ot1}}</td>
+              <td>{{detail.ot2}}</td>
+              <td>{{detail.ot3}}</td>
+              <td>{{detail.ot4}}</td>
+              <td>{{detail.ot5}}</td>
+              <td>{{detail.ot6}}</td>
+              <td>{{detail.ot7}}</td>
+            </tr>
+            <tr ng-repeat="hours in detail.worked_hours">
+              <td>{{hours.rate_type | limitTo:2 | uppercase}}</td>
+              <td>{{hours.day1}}</td>
+              <td>{{hours.day2}}</td>
+              <td>{{hours.day3}}</td>
+              <td>{{hours.day4}}</td>
+              <td>{{hours.day5}}</td>
+              <td>{{hours.day6}}</td>
+              <td>{{hours.day7}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+      <td style="text-align: right">
+        <table class="review-hours-table review-totals">
+          <tr><td>{{detail.reg1+detail.reg2+detail.reg3+detail.reg4+detail.reg5+detail.reg6+detail.reg7 }}</td></tr>
+          <tr><td>{{detail.ot1+detail.ot2+detail.ot3+detail.ot4+detail.ot5+detail.ot6+detail.ot7}}</td></tr>
+          <tr ng-repeat="hours in detail.worked_hours"><td>{{hours.day1 + hours.day2 + hours.day3 + hours.day4 + hours.day5 + hours.day6 + hours.day7}}</td></tr>
+        </table>
+      </td>
+      <td style="text-align: right">
+        <table class="review-hours-table review-totals">
+          <tr><td>{{detail.rate_reg | currency:"" }}</td></tr>
+          <tr><td>{{detail.rate_ot | currency:"" }}</td></tr>
+          <tr ng-repeat="hours in detail.worked_hours"><td>{{hours.rate_paid | currency:""}}</td></tr>
+        </table>
+      </td>
+      <td>{{detail.fringe_cash | currency:"":2}}</td>
+      <td>{{detail.fringe_benefits | currency:"":2}}</td>
+      <td>{{detail.gross_fed | currency:"":2}}</td>
+      <td>{{detail.gross_tot | currency:"":2}}</td>
+      <td class="review-buttons">
+            <!-- Reviewer -->
+            <a ng-show="payrollUser.organization_id !== reviewData.organization_id && (reviewData.payroll_activities[0].status=='received' || reviewData.payroll_activities[0].status=='flagged')"
+                class="usa-button" ui-sref="payroll.edit.hours-and-earnings-issues({ id: reviewData.id, item: detail.id, cnum: reviewData.contract.num, org: reviewData.organization_id  })">Flag</a>
+
+            <!-- Sender -->
+            <a ng-show="payrollUser.organization_id === reviewData.organization_id && (reviewData.payroll_activities[0].status=='sent' || reviewData.payroll_activities[0].status=='flagged')"
+                class="usa-button usa-button-outline" ui-sref="payroll.view.hours-and-earnings-issues({ id: reviewData.id, item: detail.id, cnum: reviewData.contract.num, org: reviewData.organization_id  })">Flag</a>
+
+            <a ng-show="payrollUser.organization_id === reviewData.organization_id && (reviewData.payroll_activities[0].status=='new' || reviewData.payroll_activities[0].status=='flagged')"
+               href="#" class="usa-button usa-button-outline" ui-sref="payroll.edit.worker-detail2({ id: reviewData.id, item: detail.id, cnum: reviewData.contract.num, org: reviewData.organization_id })">Edit</a>
+      </td>
+    </tr>
+  </tbody>
+</table>

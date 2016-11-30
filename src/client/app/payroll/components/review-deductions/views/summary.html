@@ -1,0 +1,19 @@
+<p>
+  Contractor: {{reviewData.organization.name}}<br>
+  Payroll #{{reviewData.number}}<br>
+  Week ending: {{ reviewData.week_end | date:'longDate'}}<br>
+  Project: {{reviewData.contract.title}}<br>
+  Contract # {{reviewData.contract.num | uppercase}}<br>
+  <span ng-if="reviewData.payroll_activities[0]">
+    Received: {{ reviewData.payroll_activities[0].received | date:'longDate'}}
+  </span>
+</p>
+<p>
+  <a href="#"
+  ng-show="currentUser.organization_id === reviewData.organization_id &&
+          reviewData.payroll_activities[0].status !== 'new'"
+    ui-sref="payroll.duplicate-payroll({weekEnd: dupEndOfWeek, contractNum: reviewData.contract.num, payroll: dupPayroll})">
+    <i class="fa fa-files-o" aria-hidden="false"></i>
+    Duplicate this payroll
+  </a>
+</p>

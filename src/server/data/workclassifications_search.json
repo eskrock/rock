@@ -1,0 +1,40 @@
+{
+  "state": "VA",
+  "county": "Arligton",
+  "type": "Heavy",
+   "name": "Asphalt spreaders",
+   "description": "",
+   "rate": "19",
+   "fringe": "10",
+   "notes": "a-Paid Vacation- Employees who have been employed for one year but less than three years receive 1 week of paid vacation; "
+ },
+ {
+   "state": "VA",
+   "county": "Arligton",
+   "type": "Heavy",
+    "name": "Asphalt spreaders",
+    "description": "",
+    "rate": "19",
+    "fringe": "10",
+    "notes": "a-Paid Vacation- Employees who have been employed for one year but less than three years receive 1 week of paid vacation; "
+  },
+  {
+    "state": "VA",
+    "county": "Arligton",
+    "type": "Heavy",
+     "name": "Material expeditor (asphalt plant)",
+     "description": "",
+     "rate": "10.35",
+     "fringe": "93.35",
+     "notes": "a-Paid Vacation- Employees who have been employed for one year but less than three years receive 1 week of paid vacation; "
+   },
+   {
+     "state": "VA",
+     "county": "Arligton",
+     "type": "Residential",
+      "name": "Jackhammermen (asphalt)Jackhammermen (asphalt)",
+      "description": "",
+      "rate": "79.65",
+      "fringe": "13.35",
+      "notes": "a-Paid Vacation- Employees who have been employed for one year but less than three years receive 1 week of paid vacation; "
+    }

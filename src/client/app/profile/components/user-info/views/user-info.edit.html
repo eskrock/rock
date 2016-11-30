@@ -1,0 +1,43 @@
+  <h1>Edit My Profile</h1>
+  <form name="payrollForm" novalidate ng-submit="payrollForm.$valid && save($event)">
+  <fieldset class="form-small">
+
+      <div ng-class="{ 'usa-input-error': payrollForm.$submitted && payrollForm.first.$invalid }">
+          <label for="first-name">First Name</label>
+          <div ng-messages="payrollForm.first.$error" ng-messages-multiple ng-if="payrollForm.$submitted" role="alert">
+              <span class="usa-input-error-message" ng-if="payrollForm.first.$error.required">First Name is required</span>
+          </div>
+          <input id="first" name="first" type="text" required="" aria-required="true" ng-model="user.first_name" required="" ng-pattern="/[a-zA-Z0-9^ ]/">
+      </div>
+
+      <div ng-class="{ 'usa-input-error': payrollForm.$submitted && payrollForm.last.$invalid }">
+          <label for="point-of-contact">Last Name</label>
+          <div ng-messages="payrollForm.last.$error" ng-messages-multiple ng-if="payrollForm.$submitted" role="alert">
+              <span class="usa-input-error-message" ng-if="payrollForm.last.$error.required">Last Name is required</span>
+          </div>
+          <input id="last" name="last" type="text" required="" aria-required="true" ng-model="user.last_name" required="" ng-pattern="/[a-zA-Z0-9^ ]/">
+      </div>
+
+      <label for="point-of-contact">Position</label>
+      <input id="title" name="title" type="text" ng-model="user.title" ng-pattern="/[a-zA-Z0-9^ ]/">
+
+      <div ng-class="{ 'usa-input-error': payrollForm.$submitted && payrollForm.phone.$invalid }">
+        <label for="phone">Phone</label>
+        <div ng-messages="payrollForm.phone.$error" ng-messages-multiple ng-if="payrollForm.$submitted" role="alert">
+            <span class="usa-input-error-message" ng-if="payrollForm.phone.$invalid">Phone number format invalid</span>
+        </div>
+        <input class="usa-input" id="phone" name="phone" type="text" ng-model="user.phone" ng-pattern="/^\(?(\d{3})\)?[ .-]?(\d{3})[ .-]?(\d{4})$/">
+      </div>
+
+
+      <label for="phone">Email</label>
+      <input class="usa-input" id="email" name="email" readonly="" type="email" ng-model="user.email">
+      <br>
+
+
+    <button id="profile-save" class="usa-button usa-button-inline" type="submit" value="Save">Save</button>
+
+    <a class="usa-button usa-button-outline" ui-sref="profile.view">Cancel</a>
+
+  </fieldset>
+  </form>

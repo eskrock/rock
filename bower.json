@@ -1,0 +1,38 @@
+{
+  "name": "certified-payroll-client",
+  "description": "",
+  "homepage": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular-mocks": "~1.5.8",
+    "sinon": "http://sinonjs.org/releases/sinon-1.12.1.js",
+    "bardjs": "~0.1.8"
+  },
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "angular": "~1.5.0",
+    "angular-animate": "~1.5.0",
+    "angular-ui-router": "~0.2.18",
+    "angular-sanitize": "~1.5.8",
+    "font-awesome": "~4.6.3",
+    "moment": "~2.15.0",
+    "toastr": "~2.1.3",
+    "angular-resource": "^1.5.8",
+    "angular-filter": "^0.5.11",
+    "satellizer": "^0.15.5",
+    "angular-file-upload": "^2.3.4",
+    "angulartics-google-analytics": "^0.3.0",
+    "angular-typeahead": "^1.0.2",
+    "typeahead.js": "^0.11.1"
+  },
+  "resolutions": {
+    "jquery": "^3.1.1"
+  }
+}

@@ -1,0 +1,36 @@
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Last name</th>
+      <th scope="col">First name</th>
+      <th scope="col">ID #</th>
+      <th scope="col">Work classification</th>
+      <th class="col-hours" scope="col">Hours by day/date<br>5 6 7 8 9 10 11<br>S M T W Th  F S</th>
+      <th scope="col">Total hours</th>
+      <th scope="col">Rate</th>
+      <th scope="col">Fringes (cash)</th>
+      <th scope="col">Fringes (employer-paid)</th>
+      <th scope="col">Gross earnings:  Federal projects</th>
+      <th scope="col">Gross earnings: All projects</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{payrollDetails.pay_details[0].first_name}}</th>
+      <td>{{payrollDetails.pay_details[0].last_name}}</td>
+      <td>{{payrollDetails.pay_details[0].worker_id}}</td>
+      <td>{{payrollDetails.pay_details[0].work_class}}</td>
+      <td><span class="hours-data">{{payrollDetails.pay_details[0].reg1}} {{payrollDetails.pay_details[0].reg2}} {{payrollDetails.pay_details[0].reg3}} {{payrollDetails.pay_details[0].reg4}} {{payrollDetails.pay_details[0].reg5}} {{payrollDetails.pay_details[0].reg6}} {{payrollDetails.pay_details[0].reg7}}</span><br>
+        OT: {{payrollDetails.pay_details[0].ot1}} {{payrollDetails.pay_details[0].ot2}} {{payrollDetails.pay_details[0].ot3}} {{payrollDetails.pay_details[0].ot4}} {{payrollDetails.pay_details[0].ot5}} {{payrollDetails.pay_details[0].ot6}} {{payrollDetails.pay_details[0].ot7}}</td>
+      <td>
+        {{payrollDetails.pay_details[0].reg1+payrollDetails.pay_details[0].reg2+payrollDetails.pay_details[0].reg3+payrollDetails.pay_details[0].reg4+payrollDetails.pay_details[0].reg5+payrollDetails.pay_details[0].reg6+payrollDetails.pay_details[0].reg7  | currency:"":2}}<br>
+        {{payrollDetails.pay_details[0].ot1+payrollDetails.pay_details[0].ot2+payrollDetails.pay_details[0].ot3+payrollDetails.pay_details[0].ot4+payrollDetails.pay_details[0].ot5+payrollDetails.pay_details[0].ot6+payrollDetails.pay_details[0].ot7  | currency:"":2}}
+      </td>
+      <td>{{payrollDetails.pay_details[0].rate_reg | currency:"":2}}<br>{{payrollDetails.pay_details[0].rate_ot | currency:"":2}}</td>
+      <td>{{payrollDetails.pay_details[0].fringe_cash | currency:"":2}}</td>
+      <td>{{payrollDetails.pay_details[0].fringe_benefits | currency:"":2}}</td>
+      <td>{{payrollDetails.pay_details[0].gross_fed | currency:"":2}}</td>
+      <td>{{payrollDetails.pay_details[0].gross_tot | currency:"":2}}</td>
+    </tr>
+  </tbody>
+</table>

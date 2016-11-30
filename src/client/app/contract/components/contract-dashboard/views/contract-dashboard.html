@@ -1,0 +1,94 @@
+<div class="usa-grid">
+<h1>Manage my contracts</h1>
+
+<p has-permission='admin'><a class="usa-button" href="#" ui-sref="contract.new">Add Contract</a>
+
+<div class="table-filter-grid">
+  <div class="usa-width-one-third">
+    <label for="contract-number">Contract number</label>
+    <select name="contract-number" id="contract-number" ng-model="contractNumberFilter">
+      <option value>All contracts</option>
+      <option ng-repeat="c in contracts | unique : 'num'">{{c.num}}</option>
+    </select>
+  </div>
+  <div class="usa-width-one-third">
+    <label for="status">Payroll status</label>
+    <select name="contract-status" id="contract-status" ng-model="contractStatusFilter">
+      <option value> Actionable statuses </option>
+      <option ng-repeat="c in contracts | unique : 'status'" >{{c.status}}</option>
+    </select>
+  </div>
+  <div class="usa-width-one-third">
+    <label for="contractor">Contractor name</label>
+    <select name="contractor" id="contractor" ng-model="contractTitleFilter">
+      <option value>All contractors</option>
+      <option ng-repeat="c in contracts | unique : 'title'">{{c.title}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="usa-width-one-whole" style="clear: both">
+  <div id="payrolls">
+    <table class="usa-table-borderless zebra cpa-table">
+        <thead>
+            <tr>
+                <th scope="col">
+                    <a class="sort" data-sort="weekend" ng-click="sortType = 'number'; sortReverse = !sortReverse">
+                        <i class="fa icon-uniF0DC" aria-hidden="false"></i> Number
+                    </a>
+                </th>
+
+                <th scope="col">
+                    <a class="sort" data-sort="weekend" ng-click="sortType = 'name'; sortReverse = ! sortReverse">
+                        <i class="fa icon-uniF0DC" aria-hidden="false"></i> Prime Contractor
+                    </a>
+                </th>
+
+                <th scope="col">
+                    <a class="sort" data-sort="weekend" ng-click="sortType = 'name'; sortReverse = ! sortReverse">
+                        <i class="fa icon-uniF0DC" aria-hidden="false"></i> Title
+                    </a>
+                </th>
+
+                <th scope="col">
+                    <a class="sort" data-sort="weekend" ng-click="sortType = 'status'; sortReverse = ! sortReverse">
+                        <i class="fa icon-uniF0DC" aria-hidden="false"></i> Status
+                    </a>
+                </th>
+
+                <th scope="col">
+                    <a class="sort" data-sort="weekend" ng-click="sortType = 'start_date'; sortReverse = ! sortReverse">
+                        <i class="fa icon-uniF0DC" aria-hidden="false"></i> Start Date
+                    </a>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody class="list">
+
+            <tr ng-repeat="c in contracts | orderBy : sortType : sortReverse |
+                            filter : {status : contractStatusFilter, num:contractNumberFilter, title : contractTitleFilter }">
+                <td has-permission='admin'>
+                  <div ng-switch on="c.status">
+                    <a ng-switch-when="new" ui-sref="contract.edit.projectinfo({id: c.num})">{{c.num}}</a>
+                    <a ng-switch-default ui-sref="contract.view({id: c.num})">{{c.num}}</a>
+                  </div>
+                </td>
+                <td has-permission='contractor'>
+                  <a ui-sref="contract.view({id: c.num})">{{c.num}}</a>
+                </td>
+                <td has-permission='co'>
+                  <a ui-sref="contract.view({id: c.num})">{{c.num}}</a>
+                </td>
+                <td><a href="#" ui-sref="organization.profile({id: c.prime_id})">{{c.prime}}</a></td>
+                <td>{{c.title}}</td>
+                <td>{{c.status}}</td>
+                <td>{{c.start_date | date}}</td>
+            </tr>
+
+        </tbody>
+
+    </table>
+  </div>
+</div>
+</div>

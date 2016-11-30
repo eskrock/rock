@@ -1,0 +1,18 @@
+<div class="usa-grid" ng-if="reviewData.payroll_activities[0].status=='new'">
+  <h1>Review hours and earnings</h1>
+
+  <ul id="breadcrumbs">
+      <li class="completed">1) Select Contract &amp; date</li>
+      <li class="completed">2) Complete Payroll</li>
+      <li class="current">3) Review Hours</li>
+      <li class="disabled">4) Review Deductions</li>
+      <li class="disabled">5) Sign &amp; Certify</li>
+  </ul>
+</div>
+<div class="usa-grid" style="max-width: 1280px;">
+  <h1 ng-if="reviewData.payroll_activities[0].status!='new'">Review hours and earnings</h1>
+  <div ng-include="'app/payroll/components/review-payroll/views/summary.html'"></div>
+  <div ng-include="'app/payroll/components/review-payroll/views/list-hours-and-earnings.html'"></div>
+  <a class="usa-button" ui-sref="payroll.edit.review-deductions({ id: reviewData.id, cnum: reviewData.contract.num, org: reviewData.organization_id })">View deductions</a>
+  <a class="button-back" href="#" ng-click="goBack()">Go back</a>
+</div>

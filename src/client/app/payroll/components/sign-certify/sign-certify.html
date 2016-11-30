@@ -1,0 +1,115 @@
+<div class="usa-grid" ng-if="payroll.payroll_activities[0].status === 'new'">
+
+  <h1>Sign and certify</h1>
+
+  <ul id="breadcrumbs">
+      <li class="completed">1) Select Contract &amp; date</li>
+      <li class="completed">2) Complete Payroll</li>
+      <li class="completed">3) Review Hours</li>
+      <li class="completed">4) Review Deductions</li>
+      <li class="current">5) Sign &amp; Certify</li>
+  </ul>
+</div>
+<div class="usa-grid">
+  <h1 ng-if="payroll.payroll_activities[0].status !== 'new'">Sign and certify</h1>
+  <form name="certifyForm" novalidate ng-submit="certify($event)">
+    <p>I,
+      <input ng-model="certification.signed_by" style="display: inline-block;">
+      <input ng-model="certification.signed_by_title" style="display: inline-block;">,</p><p>
+    </p><p>do hereby state:</p>
+    <p>1) that I pay or supervise the payment of the persons employed by {{org.name}} on the 6-story office building;</p>
+    <p>that during the payroll period commencing on the {{ week_start | date:'fullDate' }}, and ending the {{ payroll.week_end | date:'fullDate' }},
+       all persons employed on said project have been paid the full weekly wages earned, that no rebates have been or will be made either directly
+       or indirectly to or on behalf of said {{org.name}} from the full weekly wages earned by any person and that no
+       deductions have been made either directly or indrectly from the full wages earned by any person, other than
+       permissible deductions as defined in Regulations, Part 3 (29 C.F.R. Subtitle A), issued by the Secretary of
+       Labor under the Copeland Act, as amended (48 Stat 948…), and described below:</p>
+    <table class="usa-table-borderless zebra cpa-table">
+        <thead>
+          <tr>
+            <th scope="col">Employee</th>
+            <th scope="col">Deduction</th>
+            <th scope="col">Explanation</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="deduction in deductions | orderBy:'worker.first_name'">
+            <th scope="row">{{deduction.worker.first_name}} {{deduction.worker.last_name}}</th>
+            <td>{{deduction.deduction | currency}}</td>
+            <td>{{deduction.explanation}}</td>
+          </tr>
+          <tr ng-if="deductions.length===0">
+            <th scope="row" colspan="3">No additional deductions specified</th>
+          </tr>
+        </tbody>
+      </table>
+    <p>2) That any payrolls  otherwise under this contract required to be submitted for the above period are correct and complete, that the wage rates for laborers or mechanics contained therein are not less that the applicatble wage rates contained in any wage determination incorporated in to the contract, that the classifications set forth therin for each laborer or mechanic conform with the work he performed.</p>
+    <p>3) That any apprentices employed in the above period are duly registered in a bona fide apprenticeship program registered with a State apprenticeship agency recognized by the Bureau of Apprenticeship and Training, United States Department of Labor, or if no such recognized agency exists in a State, are registered with the Bureau of Apprenticeship and Training, United States Department of Labor.</p>
+    <p>4) That:</p>
+
+    <input id="select-plans" type="checkbox" name="select" value="select-03" style="display: inline-block;" ng-model="certification.fringe_in_benefits">
+    <label for="select-plans" style="display: inline-block;">a) WHERE FRINGE BENEFITS ARE PAID TO APPROVED PLANS, FUNDS, OR PROGRAMS</label>
+
+    <p>in addition to the basic hourly wage rates paid to each laborer or mechanic listed in the above referenced payroll, payments of fringe benefits as listed in the contract have been or will be made to appropriate programs for the benefit fo such employees, except as noted in section 4(c) below.</p>
+    <input id="select-cash" type="checkbox" name="select" value="select-03" style="display: inline-block;" ng-model="certification.fringe_in_cash">
+    <label for="select-cash" style="display: inline-block;">b) WHERE FRINGE BENEFITS ARE PAID IN CASH</label>
+
+    <p>Each laborer or mechanic listed in the above referenced payroll has been paid, as indicated on the payroll, and amount not less than the sum of the applicable basic hourly wage rate plus the amount of the required fringe benefits as listed in the contract, except as noted in section 4(c) below.</p>
+    <!--<label for="exception">Exception</label>
+    <input id="exception" name="exception" type="text">
+    <label for="explanation">Explanation</label>
+    <input id="explanation" name="explanation" type="text">-->
+    <!--
+    <a class="usa-button" href="#">Add exception</a>
+    <br>
+    -->
+
+    <div ng-class="{ 'usa-input-error': certifyForm.$submitted && certifyForm.web_time.$invalid }">
+        <label for="web_time">1) For this report, approximately how much time did it take to prepare and submit?</label>
+        <div ng-messages="certifyForm.web_time.$error" ng-if="certifyForm.$submitted" role="alert">
+            <span class="usa-input-error-message" ng-if="certifyForm.web_time.$error.required">Please select time value</span>
+        </div>
+        <select name="web_time" id="web_time" ng-model="feedback.web_time" required="">
+            <option value>--Select--</option>
+            <option value="15">15 mins</option>
+            <option value="30">30 mins</option>
+            <option value="45">45 mins</option>
+            <option value="60">1 hr</option>
+            <option value="75">1 hr 15 mins</option>
+            <option value="90">1hr 30 mins</option>
+            <option value="105">1 hr 45 mins</option>
+            <option value="120">2 hrs</option>
+        </select>
+    </div>
+
+    <div ng-class="{ 'usa-input-error': certifyForm.$submitted && certifyForm.mannual_time.$invalid }">
+        <label for="mannual_time">2) For reports submitted outside of this pilot, approximately how much time does it take to prepare and submit the report?</label>
+        <div ng-messages="certifyForm.mannual_time.$error" ng-if="certifyForm.$submitted" role="alert">
+            <span class="usa-input-error-message" ng-if="certifyForm.mannual_time.$error.required">Please select time value</span>
+        </div>
+        <select name="mannual_time" id="mannual_time" ng-model="feedback.mannual_time" required>
+            <option value>--Select--</option>
+            <option value="15">15 mins</option>
+            <option value="30">30 mins</option>
+            <option value="45">45 mins</option>
+            <option value="60">1 hr</option>
+            <option value="75">1 hr 15 mins</option>
+            <option value="90">1hr 30 mins</option>
+            <option value="105">1 hr 45 mins</option>
+            <option value="120">2 hrs</option>
+        </select>
+    </div>
+
+
+    <label for="web_time">3) Are there any other changes in the federal award environment that are reducing your reporting burden?</label>
+    <textarea rows="4" cols="50" ng-model="feedback.comment"></textarea>
+
+
+
+<div class="button_wrapper">
+    <button class="usa-button" ng-click="certifyForm.submit()">Sign &amp; certify</button>
+    <button class="usa-button usa-button-outline" ng-click="download()">Download printable version</button>
+</div>
+
+  </form>
+</div>

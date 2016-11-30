@@ -1,0 +1,14 @@
+<div ng-switch on="mode">
+  <div ng-switch-when="edit">
+    <div class="usa-width-one-whole">
+      <h1>Create new contract</h1>
+      <h5><span>Step 1: Enter project information</span> | Step 2: Assign work classifications</h5>
+    </div>
+    <div ng-include="'app/contract/components/work-classifications-manager/views/work-classifications.filter.html'"></div>
+    <div ng-include="'app/contract/components/work-classifications-manager/views/work-classifications.results.html'"></div>
+    <div ng-include="'app/contract/components/work-classifications-manager/views/work-classifications.list.html'"></div>
+  </div>
+  <div ng-switch-default>
+    <div ng-include="'app/contract/components/work-classifications-manager/views/work-classifications-list.view.html'"></div>
+  </div>
+</div>

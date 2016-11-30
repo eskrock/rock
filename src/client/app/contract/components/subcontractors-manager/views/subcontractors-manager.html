@@ -1,0 +1,8 @@
+<div ng-switch on="mode">
+  <div ng-switch-when="edit">
+    <div ng-include="'app/contract/components/subcontractors-manager/views/subcontractors-manager.edit.html'"></div>
+  </div>
+  <div ng-switch-default>
+    <div ng-include="'app/contract/components/subcontractors-manager/views/subcontractors-manager.view.html'"></div>
+  </div>
+</div>

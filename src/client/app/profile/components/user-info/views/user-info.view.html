@@ -1,0 +1,17 @@
+<div class="usa-grid">
+  <h1>Your Profile</h1>
+  <div class="profile-view">
+  <div class="usa-width-two-thirds">
+    <aside>
+      <h1> {{user.organization.name }}</h1>
+      <h3>CONTACT INFORMATION</h3>
+      <hr>
+      <p><strong>Name: </strong> {{user.first_name}} {{user.last_name}}</p>
+      <p><strong>Position: </strong><span ng-hide="user.title">Not Specified</span> {{user.title}}</p>
+      <p><strong>Phone: </strong><span ng-hide="user.phone">Not Specified</span>{{user.phone | tel}}</p>
+      <p><strong>Email: </strong> {{user.email}}</p>
+    </aside>
+  </div>
+  <div style="clear:both"></div>
+<button class="usa-button-outline" type="button" ui-sref="profile.edit" >Edit</button>
+</div>

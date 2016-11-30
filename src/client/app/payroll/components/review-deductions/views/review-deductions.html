@@ -1,0 +1,55 @@
+<div class="usa-grid" ng-if="reviewData.payroll_activities[0].status=='new'">
+  <h1>Review deductions</h1>
+
+  <ul id="breadcrumbs">
+      <li class="completed">1) Select Contract &amp; date</li>
+      <li class="completed">2) Complete Payroll</li>
+      <li class="completed">3) Review Hours</li>
+      <li class="current">4) Review Deductions</li>
+      <li class="disabled">5) Sign &amp; Certify</li>
+  </ul>
+</div>
+<div class="usa-grid" style="max-width: 1040px;">
+  <h1 ng-if="reviewData.payroll_activities[0].status!='new'">Review deductions</h1>
+  <div ng-include="'app/payroll/components/review-deductions/views/summary.html'"></div>
+  <div ng-include="'app/payroll/components/review-deductions/views/list-deductions.html'"></div>
+  <form  style="max-width: 100%;" class="usa-content" name="workerForm" uploader="uploader" novalidate ng-submit="workerForm.$valid && save($event)">
+
+      <p class="align-right" ng-show="reviewData.payroll_activities[0].status=='new' || reviewData.payroll_activities[0].status=='flagged'">
+        <a href="#" ng-click="addAttachments($event, '#attachments')"><i class="fa fa-paperclip" aria-hidden="false"></i>Attach supporting documentation</a>
+        <input style="display:none;" name="attachments" id="attachments" type="file" nv-file-select="{ alias: 'attachments' }" uploader="uploader" options="payroll" multiple name="Attach supporting documentation" /><br/>
+      </p>
+
+      <h3>Attachments</h3>
+      <table class="usa-table-borderless zebra cpa-table">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="attachment in payroll.attachments as datasource">
+              <th scope="row">
+                <a href="{{ '/payrolls/' + payroll.id + '/attachments/' + attachment.file | apiBaseUrl }}"><i class="fa fa-paperclip" aria-hidden="false"></i>{{attachment.original_name}}</a>
+              </th>
+              <td>
+                <!-- <button type="button" class="btn btn-danger btn-xs" ng-click="datasource.splice($index,1)">
+                    <span class="glyphicon glyphicon-trash"></span> Remove
+                </button> -->
+              </td>
+          </tr>
+          <tr ng-repeat="item in uploader.queue">
+              <td wid><strong>{{ item.file.name }}</strong></td>
+              <td>
+                <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                    <span class="glyphicon glyphicon-trash"></span> Remove
+                </button>
+              </td>
+          </tr>
+        </tbody>
+      </table>
+      <a class="usa-button" href="" ng-click="saveAndContinue()">Sign and Certify</a>
+      <a class="button-back" ui-sref="payroll.edit.reviews-hours-and-earnings({ id: reviewData.id, cnum: reviewData.contract.num, org: reviewData.organization_id })">Back to hours &amp; earnings</a>
+  </form>
+</div>

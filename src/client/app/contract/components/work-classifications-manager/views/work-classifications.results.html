@@ -1,0 +1,39 @@
+<div class="usa-grid " ng-show="showSearchResults">
+  <h4>Found {{results.length}} classifications matching "{{query.name}}" in {{query.county}}, {{query.state}}.</h4>
+  <p class="const-type">
+    <small>Filter by construction type</small><br>
+    <button class="usa-button-gray" ng-click="listFilter('Heavy')">Heavy</button>
+    <button class="usa-button-gray" ng-click="listFilter('Residential')">Residential</button>
+    <button class="usa-button-gray" ng-click="listFilter('Highway')">Highway</button>
+    <button class="usa-button-gray" ng-click="listFilter('Building')">Building</button>
+    <button class="usa-button-gray" ng-click="listFilter('All')">All</button>
+  </p>
+  <table class="usa-table-borderless table-classifications">
+    <thead>
+      <tr>
+        <th scope="col">Classification</th>
+        <th scope="col">Prevailing wage<br><em><small>(hourly rate + fringes)</small></em></th>
+        <th scope="col">Notes</th>
+        <th scope="col">
+          <input value="selectedAll" id="selectedAll" type="checkbox" ng-model="selectedAll" ng-click="checkAll()">
+          <label for="selectedAll"><span>Add All</span></label>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="cls in results | filter: (typeFilter==='all' ? undefined : { constructionType: typeFilter }) | orderBy: 'work_code'">
+        <th scope="row">
+          {{cls.occupation}}<br><small><em>{{cls.rateName}}</em></small>
+        </th>
+        <td><span class="text-emphasize"><span>{{ ((cls.dollarsPerHour * 1)+(cls.fringe * 1)) | currency}}</span> (<span class="text-emphasize">{{cls.dollarsPerHour | currency}}</span> + <span class="text-emphasize">{{cls.fringe | currency}}</span>)</td>
+        <td>{{cls.occupationQualifier}}</td>
+        <td>
+          <input type="checkbox" ng-model="cls.checked" value="add" id="add1" ng-true-value="'YES'" ng-false-value="'NO'">
+          <label for="add1"><span>Add</span></label>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="right" ng-click="addWorkClassifications()">Add to contract</button>
+</div>

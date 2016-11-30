@@ -1,0 +1,39 @@
+<h2 class="subheading">Reporting Hierarchy</h2>
+<table class="hierarchy-table">
+    <thead>
+        <tr>
+            <td>Contractors</td>
+            <td>Start Date</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="row in c.details.flat_hierarchy" ng-class="row.level">
+            <td><a ui-sref="organization.profile({id: {{row.id}}})">{{row.name}}</a></td>
+            <td>{{row.start_date | date: 'mediumDate'}}</td>
+        </tr>
+    </tbody>
+</table>
+<br>
+<h2 class="subheading">Payrolls</h2>
+<table class="hierarchy-table">
+    <thead>
+        <tr>
+            <td>Payroll Number</td>
+            <td>Week Ending</td>
+            <td>Status</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="p in c.details.payrolls">
+            <td ng-if="p.id"><a ui-sref='payroll.edit.reviews-hours-and-earnings({id: p.id, cnum: c.num, org: p.organization_id})'>#{{p.number}}</a></td>
+            <td ng-if="!p.id"><a href="#">#{{p.number}}</a></td>
+            <td>{{p.week_end | date:'mediumDate'}}</td>
+            <td>{{p.status}}</td>
+        </tr>
+    </tbody>
+</table>
+
+<button class="contract-detail-bottom" ui-sref="organization.payrolls({contractNum: c.num})">View All</button>
+
+
+</div>

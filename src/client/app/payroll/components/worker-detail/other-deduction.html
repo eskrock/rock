@@ -1,0 +1,37 @@
+<td>
+  <input id="other" name="deductions_other" type="number" ng-model="deduction.deduction">
+</td>
+<td>
+  <input id="other-description" name="other_description" ng-model="deduction.explanation" type="text" class="full-width">
+</td>
+<td>
+  <div ng-if="deduction.attachments && deduction.attachments.length > 0">
+    <a href="{{ 'payrolls/' + pid + '/items/' + item + '/attachments/' + attachment.file | apiBaseUrl }}"
+       class="attach-download"
+       ng-repeat="attachment in deduction.attachments">
+      <i class="fa fa-paperclip" aria-hidden="false"></i> {{attachment.original_name}}
+    </a>
+  </div>
+  <div style="padding: 5px;" ng-if="(!deduction.attachments || deduction.attachments.length === 0)">
+    <i class="fa fa-paperclip" aria-hidden="false"></i>
+    <a
+      ng-class="deduction.deduction ? 'usa-button usa-button-outline' : 'usa-button usa-button-disabled'"
+      href="#"
+      ng-click="addAttachments($event, '#other_deduction_' + index)">
+      Choose File
+    </a>
+    <input style="display:none;"
+      name="attachments"
+      id="other_deduction_{{index}}"
+      type="file"
+      nv-file-select="{ alias: 'attachments' }"
+      uploader="uploader"
+      options="deduction"
+      multiple
+      name="Attach supporting documentation" />
+  </div>
+</td>
+<td>
+  <i class="fa fa-times" aria-hidden="false"></i>
+  <a class="add-link" href="#" ng-click="removeDeduction(index)">Remove</a>
+</td>

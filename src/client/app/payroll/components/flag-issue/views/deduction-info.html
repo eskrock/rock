@@ -1,0 +1,32 @@
+<table>
+  <thead>
+    <tr>
+      <th scope="col">Last name</th>
+      <th scope="col">First name</th>
+      <th scope="col">ID #</th>
+      <th scope="col">Gross earnings: All projects</th>
+      <th scope="col">FICA</th>
+      <th scope="col">Withholding tax</th>
+      <th scope="col">Other <a href="#"><i class="fa fa-paperclip" aria-hidden="false"></i></a></th>
+      <th scope="col">Total deductions</th>
+      <th scope="col">Net wages</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">{{payrollDetails.pay_details[0].first_name}}</th>
+      <td>{{payrollDetails.pay_details[0].last_name}}</td>
+      <td>{{payrollDetails.pay_details[0].worker_id}}</td>
+      <td>{{ getNetWagesPaid(payrollDetails.pay_details[0]) + payrollDetails.pay_details[0].total_other | currency:"":2}}</td>
+      <td>{{payrollDetails.pay_details[0].fica | currency:"":2}}</td>
+      <td>{{payrollDetails.pay_details[0].taxwh | currency:"":2}}</td>
+      <td>
+          <p ng-repeat="other_deduction in payrollDetails.pay_details[0].other_deductions">
+            <span>{{other_deduction.deduction | currency:"":2}}</span></br><span>{{other_deduction.explanation}}</span>
+          </p>
+      </td>
+      <td>{{payrollDetails.pay_details[0].total_other | currency:"":2}}</td>
+      <td>{{ getNetWagesPaid(payrollDetails.pay_details[0]) | currency:"":2}}</td>
+    </tr>
+  </tbody>
+</table>

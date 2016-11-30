@@ -1,0 +1,13 @@
+<div class="usa-grid">
+  <h1>Flag issue</h1>
+  <div ng-include="'app/payroll/components/flag-issue/views/summary.html'"></div>
+  <div ng-switch on="flagType">
+      <div ng-switch-when="deductions">
+        <div ng-include="'app/payroll/components/flag-issue/views/deduction-info.html'"></div>
+      </div>
+      <div ng-switch-default>
+        <div ng-include="'app/payroll/components/flag-issue/views/hours-and-earnings-info.html'"></div>
+      </div>
+    </div>
+  <div ng-include="'app/payroll/components/flag-issue/views/flag-issue-form.html'"></div>
+</div>

@@ -1,0 +1,29 @@
+<div class="usa-grid">
+  <h1>Duplicate a previous payroll</h1>
+  <ul id="breadcrumbs">
+      <li class="completed">1) Select Contract &amp; date</li>
+      <li class="current">2) Complete Payroll</li>
+      <li class="disabled">3) Review Hours</li>
+      <li class="disabled">4) Review Deductions</li>
+      <li class="disabled">5) Sign &amp; Certify</li>
+  </ul>
+  <form name="certifyForm" novalidate ng-submit="certifyForm.$valid">
+    <fieldset>
+      <input id="last_week" type="radio" name="entry" value="last_week" ng-model="entry" ng-checked="true">
+      <label for="last_week">Duplicate last week's payroll</label>
+
+      <input id="other_week" type="radio" name="entry" value="other_week" ng-model="entry">
+      <label for="other_week" style="max-width: 60rem">Duplicate another payroll from this contract. Select from the dropdown menu</label>
+        <br>
+        <select name="payroll-number" id="contract-number" ng-model="payroll_id" ng-click="duplicateOther()">
+            <option ng-repeat="p in payrolls | unique : 'id'"
+              value='{{p.id}}' ng-selected="{{p.id===selectedPayroll}}">#{{p.number}} week ending {{p.week_end | date : 'MM/dd/yyyy'}} </option>
+        </select>
+      </fieldset>
+
+    <div class="button_wrapper">
+      <button class="usa-button" id="enter" href="#" ng-click="duplicate()">Continue</button>
+      <button class="usa-button usa-button-outline" ui-sref="payroll-new" href="#">Cancel</button>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,57 @@
+<fieldset ng-repeat="hours in worker.worked_hours" style="margin-top: -1.5rem;">
+  <legend class="usa-drop_text">Hours and rates: {{hours.rate_type | uppercase }}</legend>
+  <div class="form_group-rate">
+    <div>
+      <label for="rate_type">Name of new overtime rate (eg, Double Time, Time and a half, etc.)</label>
+      <input aria-labelledby="rate_type" class="usa-form-control" id="rate_type" name="rate_type" ng-model="hours.rate_type" type="text" value="" maxlength="50">
+    </div>
+  </div>
+  <div class="form_group-rate">
+    <div class="form_group-rate-item">
+      <label for="ot_day_sunday">Sun.</label>
+      <input aria-labelledby="ot_day_sunday" class="usa-form-control" id="ot_day_sunday" name="hours_day1" ng-model="hours.day1" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+    </div>
+    <div class="form_group-rate-item">
+      <label for="ot_day_monday">Mon.</label>
+      <input aria-labelledby="ot_day_monday" class="usa-form-control" id="ot_day_monday" name="hours_day2" ng-model="hours.day2" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+    </div>
+    <div class="form_group-rate-item">
+      <label for="ot_day_tuesday">Tue.</label>
+      <input aria-labelledby="ot_day_tuesday" class="usa-form-control" id="ot_day_tuesday" name="hours_day3" ng-model="hours.day3" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+    </div>
+    <div class="form_group-rate-item">
+      <label for="ot_day_wednesday">Wed.</label>
+      <input aria-labelledby="ot_day_wednesday" class="usa-form-control" id="ot_day_wednesday" name="hours_day4" ng-model="hours.day4" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+    </div>
+    <div class="form_group-rate-item">
+      <label for="ot_day_thursday">Thu.</label>
+      <input aria-labelledby="ot_day_thursday" class="usa-form-control" id="ot_day_thursday" name="hours_day5" ng-model="hours.day5" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+    </div>
+    <div class="form_group-rate-item">
+      <label for="ot_day_friday">Fri.</label>
+      <input aria-labelledby="ot_day_friday" class="usa-form-control" id="ot_day_friday" name="hours_day6" ng-model="hours.day6" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+    </div>
+    <div class="form_group-rate-item">
+      <label for="ot_day_saturday">Sat.</label>
+      <input aria-labelledby="ot_day_saturday" class="usa-form-control" id="ot_day_saturday" name="hours_day7" ng-model="hours.day7" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+    </div>
+    <div class="form_group-rate-item form_group-rate-total">
+      <label for="ot_total">Total hrs</label>
+      <input aria-labelledby="ot_total" class="usa-form-control" id="ot_total"  name="hours_total" ng-model="hours.total" type="number" value="">
+    </div>
+  </div>
+  <div class="form_group-rate">
+    <div class="form_group-rate-item form_group-rate-rate">
+      <label for="ot-rate" class="label-straight">Hourly rate</label>
+      <input aria-labelledby="ot-rate" class="usa-form-control" name="worker_ot_rate" ng-model="hours.rate_paid" type="number" min="0" value="">
+    </div>
+  </div>
+  <div class="form_group-rate">
+    <div class="form_group-rate-item form_group-rate-rate">
+      <div style="padding-top: 4rem">
+        <i class="fa fa-times" aria-hidden="false"></i>
+        <a class="add-link" href="#" ng-click="removeHours($index)">Remove</a>
+      </div>
+    </div>
+  </div>
+</fieldset>

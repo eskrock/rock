@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no" />
+    <title>gulp-patterns</title>
+
+    <style>
+        body {
+            font: 20px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+            padding-left: 20px;
+        }
+    </style>
+
+    <!--BEWARE of using any app styles as @media can screw up tests -->
+
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+
+</head>
+<body>
+
+<h1><a href="specs.html">Spec Runner</a></h1>
+<p><strong>Make sure the REMOTE server is running</strong><br/>
+    Click on a <em>description title</em> to narrow the scope to just its specs
+    (see "<a href="http://mochajs.github.io/mocha/#grep-option" target="_blank" title="MochaJS grep option">
+        ?grep</a>" in address bar).<br/>
+    Click on a <em>spec title</em> to see the test implementation.<br/>
+    Click on <em>page title</em> to start over.
+</p>
+
+<div id="mocha"></div>
+
+    <!-- inject:testlibraries:js -->
+    <script src="/node_modules/mocha/mocha.js"></script>
+    <script src="/node_modules/chai/chai.js"></script>
+    <script src="/node_modules/sinon-chai/lib/sinon-chai.js"></script>
+    <!-- endinject -->
+
+    <script>
+        expect = chai.expect;
+        AssertionError = chai.AssertionError;
+        mocha.setup('bdd');
+        mocha.traceIgnores = ['mocha.js', 'chai.js', 'angular.js'];
+    </script>
+
+    <!-- bower:js -->
+    <script src="/bower_components/angular/angular.js"></script>
+    <script src="/bower_components/angular-animate/angular-animate.js"></script>
+    <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/moment/moment.js"></script>
+    <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <script src="/bower_components/toastr/toastr.js"></script>
+    <script src="/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/bower_components/angular-filter/dist/angular-filter.js"></script>
+    <script src="/bower_components/satellizer/dist/satellizer.js"></script>
+    <script src="/bower_components/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script src="/bower_components/angular-mocks/angular-mocks.js"></script>
+    <script src="/bower_components/sinon/index.js"></script>
+    <script src="/bower_components/bardjs/dist/bard.js"></script>
+    <script src="/bower_components/bardjs/dist/bard-ngRouteTester.js"></script>
+    <!-- endbower -->
+
+    <!-- inject:js -->
+    <script src="/src/client/app/app.module.js"></script>
+    <script src="/src/client/app/blocks/diagnostics/diagnostics.module.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.module.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.module.js"></script>
+    <script src="/src/client/app/blocks/router/router.module.js"></script>
+    <script src="/src/client/app/contract/contract.module.js"></script>
+    <script src="/src/client/app/core/core.module.js"></script>
+    <script src="/src/client/app/dashboard/dashboard.module.js"></script>
+    <script src="/src/client/app/layout/layout.module.js"></script>
+    <script src="/src/client/app/payroll/payroll.module.js"></script>
+    <script src="/src/client/app/profile/profile.module.js"></script>
+    <script src="/src/client/app/widgets/widgets.module.js"></script>
+    <script src="/src/client/app/blocks/diagnostics/diagnostics.decorator.js"></script>
+    <script src="/src/client/app/blocks/exception/exception-handler.provider.js"></script>
+    <script src="/src/client/app/blocks/exception/exception.js"></script>
+    <script src="/src/client/app/blocks/logger/logger.js"></script>
+    <script src="/src/client/app/blocks/router/router-helper.provider.js"></script>
+    <script src="/src/client/app/contract/components/contract-dashboard/contract-dashboard.directive.js"></script>
+    <script src="/src/client/app/contract/components/contract-editor/contract-view.directive.js"></script>
+    <script src="/src/client/app/contract/components/contract-manager/contract-manager.directive.js"></script>
+    <script src="/src/client/app/contract/components/contract-view/contract-view.directive.js"></script>
+    <script src="/src/client/app/contract/components/project-info/project-info.directive.js"></script>
+    <script src="/src/client/app/contract/components/subcontractors-manager/subcontractors-manager.directive.js"></script>
+    <script src="/src/client/app/contract/components/work-classifications-manager/work-classifications-manager.directive.js"></script>
+    <script src="/src/client/app/contract/contract.route.js"></script>
+    <script src="/src/client/app/contract/models/contract.model.js"></script>
+    <script src="/src/client/app/contract/models/organization.model.js"></script>
+    <script src="/src/client/app/contract/models/subcontractor.model.js"></script>
+    <script src="/src/client/app/contract/models/workclassification.model.js"></script>
+    <script src="/src/client/app/contract/services/resource-service.js"></script>
+    <script src="/src/client/app/core/components/login/login.directive.js"></script>
+    <script src="/src/client/app/core/config.js"></script>
+    <script src="/src/client/app/core/constants.js"></script>
+    <script src="/src/client/app/core/core.route.js"></script>
+    <script src="/src/client/app/core/services/dataservice.js"></script>
+    <script src="/src/client/app/core/services/resource-service.js"></script>
+    <script src="/src/client/app/dashboard/components/dashboard/dashboard.controller.js"></script>
+    <script src="/src/client/app/dashboard/dashboard.route.js"></script>
+    <script src="/src/client/app/layout/components/footer/footer.directive.js"></script>
+    <script src="/src/client/app/layout/header/header.controller.js"></script>
+    <script src="/src/client/app/layout/shell/shell.controller.js"></script>
+    <script src="/src/client/app/payroll/components/duplicate-payroll/duplicate-payroll.directive.js"></script>
+    <script src="/src/client/app/payroll/components/new-payroll/new-payroll.directive.js"></script>
+    <script src="/src/client/app/payroll/components/no-work/no-payroll.directive.js"></script>
+    <script src="/src/client/app/payroll/components/review-payroll/review-payroll.directive.js"></script>
+    <script src="/src/client/app/payroll/components/sign-certify/sign-certify.directive.js"></script>
+    <script src="/src/client/app/payroll/components/view-deductions/view-deductions.directive.js"></script>
+    <script src="/src/client/app/payroll/components/view-payroll/view-payroll.directive.js"></script>
+    <script src="/src/client/app/payroll/components/worker-detail/worker-detail.directive.js"></script>
+    <script src="/src/client/app/payroll/models/certification.model.js"></script>
+    <script src="/src/client/app/payroll/models/deductions.model.js"></script>
+    <script src="/src/client/app/payroll/models/other_deductions.model.js"></script>
+    <script src="/src/client/app/payroll/models/payroll.model.js"></script>
+    <script src="/src/client/app/payroll/models/worker.model.js"></script>
+    <script src="/src/client/app/payroll/services/payroll.service.js"></script>
+    <script src="/src/client/app/profile/components/profile-manager/profile-manager.directive.js"></script>
+    <script src="/src/client/app/profile/components/profile-view/profile-view.directive.js"></script>
+    <script src="/src/client/app/profile/components/user-info/user-info.directive.js"></script>
+    <script src="/src/client/app/profile/profile.route.js"></script>
+    <script src="/src/client/app/profile/services/user-service.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:spechelpers:js -->
+    <script src="/src/client/test-helpers/bind-polyfill.js"></script>
+    <script src="/src/client/test-helpers/mock-data.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:specs:js -->
+    <script src="/src/client/app/blocks/exception/exception-handler.provider.spec.js"></script>
+    <script src="/src/client/app/contract/components/contract-dashboard/contract-dashboard.directive.spec.js"></script>
+    <script src="/src/client/app/contract/components/contract-manager/contract-manager.directive.spec.js"></script>
+    <script src="/src/client/app/contract/components/contract-view/contract-view.directive.spec.js"></script>
+    <script src="/src/client/app/contract/contract.route.spec.js"></script>
+    <script src="/src/client/app/core/components/login/login.directive.spec.js"></script>
+    <script src="/src/client/app/core/core.route.spec.js"></script>
+    <script src="/src/client/app/core/services/dataservice.spec.js"></script>
+    <script src="/src/client/app/dashboard/components/dashboard/dashboard.controller.spec.js"></script>
+    <script src="/src/client/app/dashboard/dashboard.route.spec.js"></script>
+    <script src="/src/client/app/layout/components/footer/footer.directive.spec.js"></script>
+    <script src="/src/client/app/layout/header/header.controller.spec.js"></script>
+    <script src="/src/client/app/layout/shell/shell.controller.spec.js"></script>
+    <script src="/src/client/app/profile/components/profile-manager/profile-manager.directive.spec.js"></script>
+    <script src="/src/client/app/profile/components/profile-view/profile-view.directive.spec.js"></script>
+    <script src="/src/client/app/profile/profile.route.spec.js"></script>
+    <!-- endinject -->
+
+    <!-- inject:templates:js -->
+    <script src="/.tmp/templates.js"></script>
+    <!-- endinject -->
+
+    <script>
+//        mocha.checkLeaks();
+//        mocha.globals(['___browserSync___oldSocketIo', 'io', '___browserSync___']);
+        bard.debugging(false);
+        var runner = mocha.run();
+        bard.mochaRunnerListener(runner);
+    </script>
+
+</body>
+</html>

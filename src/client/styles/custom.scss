@@ -1,0 +1,1419 @@
+// Custom styles ---------- //
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+small {
+  font-size: 90%;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: $font-sans;
+}
+
+// Custom Typography Styles
+h1 {
+  color: $color-gray-dark;
+}
+
+a {
+  text-decoration: none;
+}
+
+table {
+  .usa-button {
+    margin: 0;
+  }
+
+  th {
+   text-align: left;
+   border: none;
+   background-color: inherit;
+  }
+
+  td {
+    background-color: inherit;
+    border: none;
+  }
+}
+
+form {
+  fieldset {
+    @include media($small-screen) {
+      margin-left: 8rem;
+    }
+    margin-top: 3.5rem;
+    margin-bottom: 3rem;
+
+    input,
+    select {
+      @include media($small-screen) {
+        max-width: 27rem;
+      }
+    }
+  }
+
+  label {
+    margin-top: 2.5rem;
+  }
+
+  hr {
+    border: none;
+    height: 1px;
+    color: $color-gray;
+    background-color: $color-gray-lighter;
+  }
+}
+
+.welcome-text {
+  margin-bottom: 3em;
+}
+
+legend {
+  @include media($small-screen) {
+    margin-left: -8rem;
+  }
+
+  font-size: $h2-font-size;
+  margin-bottom: 2rem;
+}
+
+.usa-date-of-birth {
+    height: $input-height;
+}
+
+
+.right {
+  float: right;
+}
+
+.slide-down-content {
+  transition: height 0.5s ease-out;
+  height: 0;
+  overflow: hidden;
+  p {
+    margin: 10px 0 5px;
+  }
+}
+
+table.zebra tr:nth-child(even) {
+    background: #eee;
+}
+
+.chosen-drop ul li:before {
+  content: "";
+  display: block;
+}
+
+input.error {
+  border: 2px solid $color-secondary-dark;
+}
+
+.error-message {
+  font-size: 1.4rem;
+  line-height: 1.3;
+  color: $color-secondary-dark;
+}
+
+.usa-font-lead {
+  font-family: $font-sans;
+  font-size: $lead-font-size;
+  font-weight: $font-light;
+  max-width: 73rem;
+}
+
+a.disabled {
+    color: #AAAAAA;
+    cursor: default;
+    pointer-events: none;
+    text-decoration: none;
+}
+
+[data-icon]:before {
+  content: attr(data-icon);
+}
+
+// Navigation ------------- //
+
+
+.site-header {
+  background-color: $color-primary-darkest;
+  top: 0;
+  left: 0;
+  border-bottom: none;
+  box-shadow: 0 4px 4px $color-gray;
+
+  .usa-banner-inner {
+    margin-left: 0;
+  }
+
+  .usa-nav-container {
+    max-width: 100%;
+  }
+
+  .usa-logo {
+    white-space: nowrap;
+
+    @include media($nav-width) {
+      bottom: 3.2rem;
+
+      .usa-logo-text {
+        font-weight: 400;
+        font-size: 2.1rem;
+      }
+    }
+
+    a {
+      color: $color-white;
+    }
+  }
+}
+
+.usa-navbar {
+  border-bottom: none;
+  @include media($nav-width) {
+    height: 9.3rem;
+  }
+}
+
+.usa-nav-primary {
+  clear: right;
+
+  li.info-item {
+    span {
+      padding-left: 20px;
+    }
+
+    a.usa-nav-link {
+      padding-bottom: 10px;
+      border-top: 1px solid $color-gray;
+    }
+
+    a.username {
+        display: inline-block;
+        margin: 0;
+        padding: 9px;
+        border-top: none;
+    }
+  }
+}
+
+@include media($nav-width) {
+  .usa-nav {
+    background: inherit;
+    padding-top: 3.6rem;
+  }
+
+  .usa-nav-primary {
+    color: $color-white;
+
+    & > li {
+      font-weight: normal;
+      font-size: 1.7rem;
+      color: $color-gray-lightest;
+    }
+
+    a.usa-nav-link {
+      display: inline-block;
+      color: $color-gray-lightest;
+      padding: 0;
+      margin-right: 25px;
+      font-size: 1.7rem;
+      font-weight: normal;
+    }
+
+    a:hover {
+      background-color: inherit;
+      text-decoration: underline;
+    }
+
+    a:active {
+      box-shadow: none;
+    }
+
+    a.active {
+      color: $color-white;
+      font-weight: bold;
+    }
+
+    li.info-item {
+      a.usa-nav-link {
+        padding: 0;
+        border: none;
+      }
+      span {
+        padding-left: 0;
+      }
+      a.username {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+// Table ------------- //
+
+
+// Login ------------- //
+
+.login {
+  padding-bottom: 2rem;
+
+  .sign-in-google {
+    background-color: #d54331;
+
+    &:hover {
+      background-color: #cb3927;
+    }
+  }
+
+  .sign-in-cloud-gov {
+    .ico-cloud-gov {
+      background: url(../img/cloud_gov.png) no-repeat;
+      background-size: 16px 16px;
+    }
+
+    span {
+      padding-left: 3px;
+    }
+  }
+
+  p.section {
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+  }
+
+  .login-warning {
+    font-size: $small-font-size;
+  }
+}
+
+#main-content {
+  margin-top: 6rem;
+  flex: 1;
+}
+
+.button-left {
+  margin-top: 3rem;
+  display: inline-block;
+}
+
+.button-right {
+  float: right;
+}
+
+#profile-save
+{
+  display:inline;
+}
+
+.button-back {
+  margin-left: 2em;
+}
+
+// site-footer ------------- //
+
+.site-footer {
+
+
+  background-color: $color-primary-darkest;
+  margin-top: 8rem;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  font-size: $small-font-size;
+  color: $color-white;
+
+  img {
+    height: 72px;
+    padding-right: 15px;
+    margin-top: 13px;
+  }
+
+  a {
+    color: $color-white;
+    text-decoration: none;
+  }
+
+  ul {
+    margin-top: 5px;
+  }
+}
+
+// Dashboard ------------- //
+
+.table-filter-grid {
+  margin-top: 40px;
+  margin-bottom: -10px;
+
+  .table-filter {
+    background-color: $color-gray-warm-light;
+    color: $color-gray-dark;
+    padding: 1.5rem 2rem;
+    min-width: 980px;
+
+    .filter-title {
+      margin-right: 2rem;
+      display: inline-block;
+    }
+
+    .filter-group {
+      margin-left: 2rem;
+      display: inline-block;
+      font-size: $small-font-size;
+
+      input, select {
+        height: 3rem;
+        margin: 0 0;
+      }
+
+      input {
+        margin-left: 0.5rem;
+        display: inline-block;
+        padding: 1rem 1rem;
+        font-size: inherit;
+        max-width: 8.7rem;
+      }
+
+      select {
+        font-size: inherit;
+        padding: 0.5rem 1rem;
+        width: 155px;
+        min-width: 155px;
+      }
+
+      #contractor {
+        min-width: 205px;
+      }
+
+      &.attached {
+        margin-left: 0.5rem;
+        margin-right: 1rem;
+      }
+    }
+  }
+}
+
+.cpa-table {
+  width: 100%;
+  margin-bottom: 6rem;
+  min-width: $nav-width;
+
+  thead tr {
+    border: 1px solid $color-gray-warm-dark;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+
+    th {
+      background-color: $color-primary-alt-lightest;
+    }
+  }
+
+  tbody tr th, tbody tr td {
+    vertical-align: top;
+  }
+}
+
+td.review-buttons {
+  a {
+    margin-bottom: 5px;
+  }
+}
+
+table.review-hours-table {
+  display: inline;
+  margin: 0;
+  min-width: inherit;
+  tr:nth-child(even) {
+    background: none;
+  }
+  td, th {
+    padding: 0;
+    border: 1px solid lightgrey;
+    text-align: center;
+    font-weight: normal;
+    background: inherit;
+    min-width: 22px;
+  }
+
+  &.review-totals {
+    td, th {
+      text-align: right;
+      border: none
+    }
+  }
+}
+
+.cpa-table-large {
+  min-width: $large-screen;
+  width: 100%;
+}
+
+
+h2 + .contract-payrolls {
+  margin-top: 0;
+}
+.contract-payrolls {
+  display: inline-block;
+  span {
+    display: inline-block;
+    margin-left: 15px;
+    font-weight: normal;
+    font-size: 0.8em;
+  }
+}
+.final-payroll strong {
+  color: $color-secondary;
+  font-weight: bold;
+}
+
+// Fix for table alignment
+
+.standfirst {
+  @include media($medium-screen) {
+    margin: 0 auto;
+    max-width: 53rem;
+    padding-bottom: 3rem;
+    text-align: center;
+  }
+
+  label {
+    text-align: left;
+  }
+
+  select {
+    max-width: 32rem;
+  }
+}
+
+
+.table-past-projects {
+  tbody {
+    td, th {
+      @include padding(.7rem null);
+    }
+
+    .col-not_received {
+      @include padding(1.5rem null);
+    }
+
+    .row-normal {
+      th, td {
+        padding: 1.5rem;
+      }
+    }
+  }
+}
+
+.prime-row {
+  background-color: $color-gray-lightest;
+}
+
+td input[type="checkbox"] + label {
+  margin: 0;
+}
+
+.bundle-button {
+  float: right;
+}
+
+.row-sub {
+ td:nth-child(2) {
+//    padding-left: 3rem;
+  }
+}
+
+.sub-1 {
+  th, td {
+    border: none;
+  }
+}
+
+.table-no-padding {
+  margin: 0;
+
+  th, td {
+    border: none;
+    padding: 0;
+  }
+}
+
+.table-no-padding {
+  td:nth-child(2) {
+    width: 45%;
+  }
+
+  td:nth-child(3) {
+    width: 0%;
+    font-weight: $font-normal;
+  }
+
+  td:nth-child(4) {
+    width: 24%;
+  }
+
+  td:nth-child(5) {
+    width: 4%;
+  }
+}
+
+.table-special {
+  th:nth-child(2) {
+    width: 36%;
+  }
+
+  th:nth-child(3) {
+    width: 0%;
+  }
+
+  th:nth-child(4) {
+    width: 21%;
+  }
+
+  th:nth-child(5) {
+    width: 9%;
+  }
+}
+
+.accordion-table-inner {
+  td:nth-child(2) {
+    width: 37%;
+  }
+
+  td:nth-child(3) {
+    width: 0%;
+  }
+
+  td:nth-child(4) {
+    width: 28%;
+  }
+}
+
+.fa {
+  padding-right: .5rem;
+}
+
+.fa-check {
+  color: $color-green;
+}
+
+.fa-times {
+  color: $color-secondary;
+}
+
+.fa-flag {
+  color: $color-gold;
+}
+
+.fa {
+  &.fa-flag + a {
+    font-weight: bold;
+  }
+  &.fa-times + span {
+    font-weight: bold;
+    color: $color-secondary;
+  }
+}
+
+.button-none {
+  background-image: none !important;
+
+  &:hover {
+    background-color: $color-gray-lightest !important;
+    cursor: default;
+  }
+}
+
+.accordion-prime {
+  button {
+    background-position: left 3rem center;
+    padding-left: 5.5rem;
+    padding-right: 3rem;
+  }
+}
+
+.accordion-prime-single {
+  padding: 1.5rem 3rem 1.5rem 5.5rem;
+
+  table {
+    line-height: 0;
+  }
+
+  td:nth-child(2),
+  td:nth-child(4) {
+    font-weight: $font-bold;
+  }
+}
+
+.empty-select {
+  width: 3rem;
+  height: 1.8rem;
+  display: block;
+}
+
+.row-third-level {
+
+}
+
+.hierarchies {
+  .row-sub th {
+    padding-left: 50px;
+  }
+
+  .row-prime {
+    font-weight: bold;
+  }
+
+  .usa-accordion-content{
+    border: 4px solid #f1f1f1;
+    padding-top: 10px;
+  }
+
+  .accordion-prime-single table {
+    line-height: 1.5;
+  }
+}
+
+.status {
+  div {
+    display: inline-block;
+  }
+}
+
+.payroll-number {
+  text-align: center;
+}
+
+.status-new {
+  font-size: 13px;
+  margin-left: 5px;
+}
+
+.sort {
+  cursor: pointer;
+}
+
+// Upload payroll page ----- //
+
+.file_upload {
+  @include padding(2rem null);
+  background-color: $color-gray-lighter;
+
+  h2 {
+    margin-top: 0;
+  }
+
+  .usa-button {
+    margin-right: 0;
+  }
+}
+
+// This is copied from https://github.com/blueimp/jQuery-File-Upload/blob/master/css/jquery.fileupload.css */
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.fileinput-button input {
+  -ms-filter:'alpha(opacity=0)';
+  cursor: pointer;
+  direction: ltr;
+  font-size: 200px;
+  height: 4rem;
+  margin: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.form-upload {
+  max-width: 52.5rem;
+}
+
+// Create or choose new payroll page ----- //
+
+.heading-add_new_project {
+  padding-top: 1.5em;
+}
+
+// Enter employee details page ----- //
+
+.text-emphasize {
+  color: $color-primary;
+  font-weight: $font-bold;
+}
+
+.form_group-rate-item {
+  clear: none;
+  float: left;
+  margin-right: 1.5rem;
+  width: 4rem;
+  height: 94px;
+}
+
+.form_group-rate-total {
+  margin-left: 2rem;
+  width: 9rem;
+}
+
+.form_group-rate-fringe {
+  margin-left: 2rem;
+  width: 12rem;
+}
+
+.form_group-rate-fringe-hourly {
+  clear: both;
+  margin-left: 0;
+}
+
+.label-straight {
+  margin-top: 5px;
+}
+
+.form_group-rate-rate {
+  margin-left: 2rem;
+  margin-top: 2rem;
+  width: 12rem;
+}
+
+.form_group-gross {
+  clear: both;
+  input {
+    width: 12rem;
+  }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.add-link {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.twitter-typeahead {
+  width: 100%;
+}
+
+.tt-menu {
+  width: 27rem;
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.tt-suggestion {
+  padding: 1rem 0.7em;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.tt-suggestion:hover {
+  cursor: pointer;
+  background-color: #eee;
+}
+
+.tt-suggestion.tt-cursor {
+  background-color: #eee;
+}
+
+.fieldset-inputs-owner {
+  margin-left: 0;
+  margin-top: 1rem;
+}
+
+.form-group-deductions {
+  clear: none;
+  float: left;
+  margin-right: 3rem;
+
+  label,
+  input {
+    width: 12rem;
+    &.full-width {
+      width: 100%;
+    }
+  }
+
+  .fa {
+    font-size: 2rem;
+  }
+
+  .deductions-add-another {
+    display: inline-block;
+    padding: 1rem 0.7em;
+  }
+
+  &.clear {
+    clear: both
+  }
+
+  &.table {
+    margin-bottom: 5px;
+    th, td {
+      padding: 0;
+      font-weight: normal;
+      background-color: inherit;
+    }
+    .deduction {
+      width: 12.5rem
+    }
+    .description {
+      width: 27.5rem;
+    }
+    .attachments {
+      padding-left: 5px;
+      width: 40.5rem;
+    }
+    .actions {
+      width: 10rem;
+    }
+    .attach-download {
+      display: inline-block;
+      padding: 5px;
+    }
+  }
+}
+
+.form-group-deductions-attachment {
+  .attach-button {
+    margin-top: 6px;
+  }
+}
+
+.form-group-deductions-total {
+  clear: both;
+}
+
+.form-group-other-deductions {
+  clear: both;
+
+}
+
+.optional-info {
+  clear: both;
+  input[id=total-deductions],
+  label[for=custom-classification] {
+    display: inline;
+  }
+}
+
+.net-wages {
+  font-size: 3rem;
+  font-weight: bold;
+  color: $color-gray-dark;
+  margin-bottom: 1.5em;
+  margin-top: 1em;
+}
+
+// Create new payroll
+
+.week-first {
+  @include media($medium-screen) {
+//    float: left;
+  }
+}
+
+.button_wrapper {
+  margin-top: 2rem;
+}
+
+// Contract info
+.table-classifications {
+  tr,
+  td {
+    vertical-align: top;
+    min-width: 160px;
+  }
+  th[scope="row"] {
+    width: 33%;
+  }
+}
+
+// Review hours
+
+.col-hours {
+  width: 15%;
+  text-align: right;
+}
+
+.hours-data {
+  margin-left: 2.7rem;
+}
+
+.usa-input-error-message {
+  .fa {
+    padding-right: 0;
+  }
+}
+
+// create contract
+label + h4 {
+  margin-top: 5px;
+  color: #0071bc;
+}
+
+form.classifications {
+  max-width: none;
+}
+
+h5 span {
+  font-weight: normal;
+  color: #757575;
+}
+
+div > aside {
+  margin-top: 2rem;
+  border: 5px solid #f1f1f1;
+  p {
+    margin: 2rem;
+  }
+  h4 {
+    text-align: center;
+    font-size: $aside-font-size;
+    background: #f1f1f1;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 2rem 2rem;
+  }
+}
+
+label span {
+  display: none;
+}
+
+.email {
+  color: #0071bc;
+  cursor: pointer;
+}
+
+table input[type="checkbox"] + label {
+  margin: 0;
+}
+
+.const-type button {
+  font-size: $small-font-size;
+}
+
+.search-results {
+  transition: height 0.5s ease-out;
+  height: 0;
+  overflow: hidden;
+}
+
+.review-hours-and-earnings {
+  .usa-grid {
+    max-width: 100%;
+  }
+}
+
+// Sign and certify page
+
+label[for="select-plans"] {
+  max-width: 100%;
+}
+
+// Chosen overrides
+.chosen-container,
+.chosen-container-active.chosen-with-drop {
+  font-size: 1.7rem;
+  .chosen-single {
+    height: auto;
+    background: transparent;
+    background-image: none;
+    border: 1px solid #5b616b;
+    border-radius: 0;
+    box-sizing: border-box;
+    color: #212121;
+    display: block;
+    font-size: 1.7rem;
+    margin: 0.2em 0;
+    max-width: 46rem;
+    outline: none;
+    padding: 1rem 0.7em;
+    width: 100%;
+    div {
+      display: none;
+    }
+  }
+  ul {
+    width: 100%;
+  }
+}
+
+// profile page
+.contract {
+  background: #f1f1f1;
+  padding: 4rem 6rem;
+
+  h3 {
+    margin-top: 0;
+  }
+
+  ul {
+    margin: 10px 0 0 0;
+  }
+}
+
+.sub-name {
+  text-transform: capitalize;
+}
+
+// Custom tooltip styles -------------- //
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+
+  /* Show the tooltip text when you mouse over the tooltip container */
+  &:hover .tooltiptext {
+    visibility: visible;
+  }
+
+  .tooltiptext {
+    background-color: $color-base;
+    border-radius: 6px;
+    bottom: 100%;
+    color: #fff;
+    font-size: 13px;
+    left: 50%;
+    padding: 5px 8px;
+    margin-left: -100px; /* Use half of the width (120/2 = 60), to center the tooltip */
+    width: 200px;
+    visibility: hidden;
+
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+  }
+
+  .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 100%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: $color-base transparent transparent transparent;
+  }
+}
+
+#breadcrumbs {
+  overflow: hidden;
+  width: 100%;
+  padding: 0px;
+}
+
+#breadcrumbs a {
+  color: inherit;
+}
+
+#breadcrumbs li {
+  float: left;
+  margin: 0 1em 5em 1em;
+  list-style-type: none;
+  background: #ddd;
+  padding: .7em 1em;
+  text-decoration: none;
+  color: #444;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  position: relative;
+  width: 170px;
+  text-align: center;
+  font-size: 13px;
+}
+
+#breadcrumbs li::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  margin-top: -1.5em;
+  border-width: 1.5em 0 1.5em 1em;
+  border-style: solid;
+  border-color: #ddd #ddd #ddd transparent;
+  left: -1em; }
+
+#breadcrumbs li::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  margin-top: -1.5em;
+  border-top: 1.5em solid transparent;
+  border-bottom: 1.5em solid transparent;
+  border-left: 1em solid #ddd;
+  right: -1em; }
+
+/* start completed*/
+#breadcrumbs li.completed {
+  background: #E7F4E4;
+}
+
+#breadcrumbs li.completed::before {
+  border-color: #E7F4E4 #E7F4E4 #E7F4E4 transparent;
+}
+
+#breadcrumbs li.completed::after {
+  border-left: 1em solid #E7F4E4;
+}
+/* end completed*/
+
+/* start current*/
+#breadcrumbs li.current {
+  font-weight: bold;
+  background: #ddd;
+  color: #444;
+}
+
+#breadcrumbs li.current::before {
+  border-color: #ddd #ddd #ddd transparent;
+}
+
+#breadcrumbs li.current::after {
+  border-left: 1em solid #ddd;
+}
+/* end current*/
+
+/* start disabled*/
+#breadcrumbs li.disabled {
+  background: #f2f2f2;
+  color: #9b9b9b;
+}
+
+#breadcrumbs li.disabled::before {
+  border-color: #f2f2f2 #f2f2f2 #f2f2f2 transparent;
+}
+
+#breadcrumbs li.disabled::after {
+  border-left: 1em solid #f2f2f2;
+}
+
+.company-info-box {
+    background-color: #f1f1f1;
+    border: 1px solid;
+    position: relative;
+    padding: 3rem 2rem;
+    margin-top: 15px;
+    border-radius: 5px;
+    width: 657px;
+    margin-left: 87px;
+}
+.company-info-box p {
+  padding: 8px 0px;
+  margin-left: 38px;
+}
+.company-info-entry {
+  position: absolute;
+  left: 260px;
+}
+/*.company-info-box p:first-child {
+    padding: 20px 0px 10px 0px;
+  }
+  .company-info-box:last-child {
+    padding: 10px 0px 20px 0px;
+  }*/
+.push-down {
+  padding-top: 20px;
+  margin-bottom: 5px;
+}
+.content-break {
+    border: 0;
+    height: 1px;
+    margin: 35px;
+    width: 996px;
+    background: #d6d7d9;
+}
+.contract-button {
+    width: 796px;
+    clear: both;
+    height: 55px;
+    border-radius: 5px;
+    line-height: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #4a4a4a;
+    border-color: #4a4a4a;
+    border: 2px solid;
+}
+.contract-button:hover, .contract-button-active {
+    width: 796px;
+    height: 55px;
+    line-height: 50px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #4a4a4a;
+    border-color: #4a4a4a;
+    border: 2px solid;
+}
+.contract-name {
+    margin-right: 41px;
+    margin-left: 20.5px;
+}
+.contract-number {
+  margin-left: 41px;
+  margin-right: 20.5px;
+}
+.contract-content {
+  margin-left: 87px;
+  padding: 0;
+  margin-top:50px !important;
+  margin-bottom: 50px;
+}
+.hierarchy-table {
+  border: 0px;
+  margin-top: 0px;
+  box-sizing: border-box;
+  width:634px;
+}
+.hierarchy-table thead tr {
+  border: 1px solid;
+  border-color: #4a4a4a;
+}
+.hierarchy-table thead tr td{
+  border: none;
+  padding-top: 0;
+  padding-bottom: 0;
+  height: 40px;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: #e1f3f8 !important;
+}
+.hierarchy-table tbody tr:nth-child(odd) td {
+   background-color: #fff !important;
+   border-collapse: collapse;
+   border:none;
+}
+.hierarchy-table tbody tr:nth-child(even) td {
+   background-color: #e4e2e0 !important;
+   border-collapse: collapse;
+   border:none;
+}
+.hierarchy-table tbody tr {
+  height: 40px;
+}
+.hierarchy-table tbody tr td {
+  height: 40px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+.hierarchy-row-top td:first-child{
+   padding-left: 20px;
+}
+.hierarchy-row-sub td:first-child{
+   padding-left: 40px;
+}
+.hierarchy-row-sub-sub td:first-child{
+   padding-left: 60px;
+}
+.hierarchy-row-sub-sub-sub td:first-child{
+   padding-left: 80px;
+}
+
+.subheading {
+  padding: 0;
+  margin-bottom: 20px;
+}
+.page-title{
+  margin-bottom: 40px !important;
+}
+.contract-detail-bottom {
+  margin-bottom: 75px !important;
+}
+.row-bold {
+  font-weight: bold;
+}
+
+
+.agree_options{
+  label{
+    max-width: 100% ! important;
+  }
+
+  .table-filter-grid {
+    margin-top: 40px;
+    margin-bottom: -10px;
+
+    .table-filter {
+      background-color: $color-gray-warm-light;
+      color: $color-gray-dark;
+      padding: 1.5rem 2rem;
+      min-width: 980px;
+
+      .filter-title {
+        margin-right: 2rem;
+        display: inline-block;
+      }
+
+      .filter-group {
+        margin-left: 2rem;
+        display: inline-block;
+        font-size: $small-font-size;
+
+        input, select {
+          height: 3rem;
+          margin: 0 0;
+        }
+
+        input {
+          margin-left: 0.5rem;
+          display: inline-block;
+          padding: 1rem 1rem;
+          font-size: inherit;
+          max-width: 8.7rem;
+        }
+
+        select {
+          font-size: inherit;
+          padding: 0.5rem 1rem;
+          width: 155px;
+          min-width: 155px;
+        }
+
+        #contractor {
+          min-width: 205px;
+        }
+
+        &.attached {
+          margin-left: 0.5rem;
+          margin-right: 1rem;
+        }
+      }
+    }
+  }
+
+
+}
+
+.profile-view
+{
+  aside{
+    margin-top:0px;
+    padding:10px;
+    border-radius: 5px;
+  }
+  .usa-width-two-thirds
+  {
+    background: #f1f1f1;
+    border: 1px solid darkgrey;
+    border-radius: 5px;
+  }
+
+  h1{
+    margin:0px;
+  }
+
+}

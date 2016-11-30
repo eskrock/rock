@@ -1,0 +1,19 @@
+<table class="usa-table-borderless table-classifications zebra cpa-table">
+  <thead>
+    <tr>
+      <th scope="col">Classification</th>
+      <th scope="col">Davis-Bacon rate</th>
+      <th scope="col">Fringes</th>
+      <th scope="col">Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="wrkcls in workclassifications">
+
+      <th scope="row">{{wrkcls.work_code}}</th>
+      <td>{{wrkcls.rate | currency}}</td>
+      <td>{{wrkcls.fringe | currency}}</td>
+      <td>{{wrkcls.description}}</tr>
+
+  </tbody>
+</table>

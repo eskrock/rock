@@ -1,0 +1,77 @@
+<form class="usa-content" name="contract_form" novalidate ng-submit="contract_form.$valid && saveSubContractor($event)">
+  <fieldset>
+    <legend  ng-init="setForm(contract_form);">Subcontractor information</legend>
+    <div ng-class="{ 'usa-input-error': contract_form.$submitted && contract_form.company_name.$invalid }">
+      <label for="company_name">Company name</label>
+      <div ng-messages="contract_form.company_name.$error" ng-messages-multiple ng-if="contract_form.$submitted" role="alert">
+          <span class="usa-input-error-message" ng-if="contract_form.company_name.$error.required">Please enter company name</span>
+      </div>
+      <input id="company_name" name="company_name" ng-model="subcontractor.subcontractors[0].name" ng-trim="" required="" aria-required="true" type="text" aria-describedby="">
+    </div>
+
+    <div ng-class="{ 'usa-input-error': contract_form.$submitted && contract_form.point_of_contact.$invalid }">
+      <label for="point_of_contact">Point of contact</label>
+      <div ng-messages="contract_form.email.$error" ng-messages-multiple ng-if="contract_form.$submitted" role="alert">
+          <span class="usa-input-error-message" ng-if="contract_form.point_of_contact.$error.required">Please enter point of contact</span>
+      </div>
+      <input id="point_of_contact" name="point_of_contact" ng-model="subcontractor.subcontractors[0].poc" ng-trim="" required="" aria-required="true" type="text" aria-describedby="">
+    </div>
+
+    <div ng-class="{ 'usa-input-error': contract_form.$submitted && contract_form.email.$invalid }">
+      <label for="email">Email</label>
+      <div ng-messages="contract_form.email.$error" ng-messages-multiple ng-if="contract_form.$submitted" role="alert">
+          <span class="usa-input-error-message" ng-if="contract_form.email.$error.email">Please enter email address</span>
+      </div>
+      <input id="email" name="email" disabled ng-trim="" aria-required="true" type="email" aria-describedby="">
+    </div>
+
+    <div ng-class="{ 'usa-input-error': contract_form.$submitted && contract_form.phone_number.$invalid }">
+      <label for="phone_number">Phone</label>
+      <div ng-messages="contract_form.phone_number.$error" ng-messages-multiple ng-if="contract_form.$submitted" role="alert">
+          <span class="usa-input-error-message" ng-if="contract_form.phone_number.$error.pattern">Please enter phone number</span>
+      </div>
+      <input id="phone_number" name="phone_number" ng-model="subcontractor.subcontractors[0].phone" ng-pattern="/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/" ng-trim="" aria-required="true" type="text" aria-describedby="">
+    </div>
+
+
+    <label>Projected start date</label>
+    <input type="hidden" name="start_date" ng-model="subcontractor.subcontractors[0].start_date" required/>
+    <div ng-messages="contract_form.start_date.$error" ng-messages-multiple ng-if="contract_form.$submitted" role="alert">
+        <span class="usa-input-error-message" ng-if="contract_form.start_date.$error.required">Please enter projected start date</span>
+    </div>
+    <div class="usa-date-of-birth">
+      <div class="usa-datefield usa-form-group usa-form-group-month" aria-describedby="date-hint">
+        <input aria-describedby="date-hint" class="usa-contract_form-control" id="start_month" name="start_month" ng-model-options="{updateOn : 'change blur'}" ng-model="$parent.$parent.$parent.startDateMonth" required="" maxlength="2" type="text">
+      </div>
+      <div class="usa-datefield usa-form-group usa-form-group-day">
+        <input aria-describedby="date-hint" class="usa-contract_form-control" id="start_day" name="start_day" ng-model-options="{updateOn : 'change blur'}" ng-model="$parent.$parent.$parent.startDateDay" required="" maxlength="2" type="text">
+      </div>
+      <div class="usa-datefield usa-form-group usa-form-group-year">
+        <input aria-describedby="date-hint" class="usa-contract_form-control" id="start_year" name="start_year" ng-model-options="{updateOn : 'change blur'}" ng-model="$parent.$parent.$parent.startDateYear" required="" maxlength="4" type="text">
+      </div>
+    </div>
+
+    <label>Projected end date</label>
+    <input type="hidden" name="start_date" ng-model="subcontractor.subcontractors[0].start_date" required/>
+    <div ng-messages="contract_form.end_date.$error" ng-messages-multiple ng-if="contract_form.$submitted" role="alert">
+        <span class="usa-input-error-message" ng-if="contract_form.end_date.$error.required">Please enter projected end date</span>
+    </div>
+    <div class="usa-date-of-birth">
+      <div class="usa-datefield usa-form-group usa-form-group-month" aria-describedby="date-hint">
+        <input aria-describedby="date-hint" class="usa-contract_form-control" id="end_month" name="end_month" ng-model-options="{updateOn : 'change blur'}" ng-model="$parent.$parent.$parent.endDateMonth" required="" maxlength="2" type="text">
+      </div>
+      <div class="usa-datefield usa-form-group usa-form-group-day">
+        <input aria-describedby="date-hint" class="usa-contract_form-control" id="end_day" name="end_day" ng-model-options="{updateOn : 'change blur'}" ng-model="$parent.$parent.$parent.endDateDay" required="" maxlength="2" type="text">
+      </div>
+      <div class="usa-datefield usa-form-group usa-form-group-year">
+        <input aria-describedby="date-hint" class="usa-contract_form-control" id="end_year" name="end_date" ng-model-options="{updateOn : 'change blur'}" ng-model="$parent.$parent.$parent.endDateYear" required="" maxlength="4" type="text">
+      </div>
+    </div>
+
+
+  <div class="button_wrapper" style="margin-top: 4rem;">
+    <button class="usa-button" type="submit">Add subcontractor</a>
+  </div>
+
+  </fieldset>
+</form>

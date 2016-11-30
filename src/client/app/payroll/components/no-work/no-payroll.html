@@ -1,0 +1,19 @@
+<div class="usa-grid">
+  <h1>File a no-work payroll</h1>
+  <ul id="breadcrumbs">
+      <li class="completed">1) Select Contract &amp; date</li>
+      <li class="current">2) Complete Payroll</li>
+      <li class="disabled">3) Review Hours</li>
+      <li class="disabled">4) Review Deductions</li>
+      <li class="disabled">5) Sign &amp; Certify</li>
+  </ul>
+  <h3>Payroll #{{payroll.number}}: No work</h3>
+
+  <strong>{{org.name}}</strong> has done no work on contract
+  <strong>#{{contract_num}}</strong> for the week ending
+  <strong>{{ payroll.week_end | date:'MM/dd/yyyy' }}</strong>.
+
+  <div class="button_wrapper">
+    <button class="usa-button" id="enter" href="#" ng-click="certify()">Certify and send payroll</button>
+  </div>
+</div>

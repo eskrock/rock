@@ -1,0 +1,52 @@
+<div class="usa-grid">
+  <h1>Confirmation</h1>
+  <p>Are you sure you want to send the payroll(s) below? Confirm your choice(s) by clicking the send button.</p>
+
+
+  <div class="usa-width-one-whole">
+    <div id="payrolls">
+    <table class="usa-table-borderless zebra cpa-table">
+      <thead>
+        <tr>
+          <th scope="col">
+            <a class="sort" data-sort="weekend" href="#" ng-click="setSortCol('week_end')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Week end date
+            </a>
+          </th>
+          <th scope="col">
+            <a class="sort" data-sort="contract-number"  href="#" ng-click="setSortCol('contract')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Contract #
+            </a>
+          </th>
+          <th scope="col">
+            <a class="sort" data-sort="contractor"  href="#" ng-click="setSortCol('org')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Contractor
+            </a>
+            </th>
+          <th scope="col">
+            <a class="sort" data-sort="payroll-number"  href="#" ng-click="setSortCol('payroll_num')">
+              <i class="fa fa-sort" aria-hidden="false"></i>
+              Payroll #
+            </a>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="list">
+        <tr ng-repeat="item in selectedActivities">
+          <h4>{{item}}</h4>
+          <td class="weekend">{{item.payroll.week_end | date:'longDate' }}</td>
+          <td class="contract-number"><a href="#" ui-sref="contract.view({id: '{{item.payroll.contract.num}}'})">{{item.payroll.contract.num}}</a></td>
+          <td class="contractor"><a href="#" ui-sref="organization.profile({id: item.payroll.organization.id})">{{item.payroll.organization.name}}</a></td>
+          <td class="payroll-number"><a href="#" ng-click="gotoReview(item)">{{item.payroll.number}}</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <button ng-click='sendPayrolls()'>Confirm & Send</button>
+    <button ui-sref='dashboard'>Back</button>
+  </div>
+  </div>
+</div>

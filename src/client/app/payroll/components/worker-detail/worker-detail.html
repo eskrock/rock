@@ -1,0 +1,233 @@
+<div class="usa-grid">
+  <h1>Add New Payroll</h1>
+
+  <ul id="breadcrumbs">
+      <li class="completed">1) Select Contract &amp; date</li>
+      <li class="current">2) Complete Payroll</li>
+      <li class="disabled">3) Review Hours</li>
+      <li class="disabled">4) Review Deductions</li>
+      <li class="disabled">5) Sign &amp; Certify</li>
+  </ul>
+
+  <form class="usa-content" name="workerForm" uploader="uploader" novalidate ng-submit="workerForm.$valid && save($event)">
+    <fieldset>
+      <div ng-class="{ 'usa-input-error': workerForm.$submitted && workerForm.first_name.$invalid }">
+        <label for="first_name">First name</label>
+        <span class="usa-input-error-message" ng-show="workerForm.$submitted && workerForm.first_name.$invalid" id="input-error-message" role="alert">Please enter first name</span>
+        <input id="first_name" name="first_name" type="text" required="" ng-model="worker.first_name" aria-required="true">
+      </div>
+
+      <div ng-class="{ 'usa-input-error': workerForm.$submitted && workerForm.last_name.$invalid }">
+        <label for="last_name">Last name</label>
+        <span class="usa-input-error-message" ng-show="workerForm.$submitted && workerForm.last_name.$invalid" id="input-error-message" role="alert">Please enter last name</span>
+        <input id="last_name" name="last_name" type="text" required="" ng-model="worker.last_name" aria-required="true">
+      </div>
+
+      <div ng-class="{ 'usa-input-error': workerForm.$submitted && workerForm.worker_id.$invalid }">
+        <label for="worker_id">ID number</label>
+        <div ng-messages="workerForm.worker_id.$error" ng-if="workerForm.$submitted" role="alert">
+            <span class="usa-input-error-message" ng-if="workerForm.worker_id.$error.required">Please enter ID number</span>
+            <span class="usa-input-error-message" ng-if="workerForm.worker_id.$error.pattern">Up to six alpha-numeric characters allowed</span>
+        </div>
+        <span class="usa-input-error-message" ng-show="workerForm.$submitted && workerForm.worker_id.$invalid" id="input-error-message" role="alert">Please enter ID number</span>
+        <input id="worker_id" name="worker_id" class="usa-input-tiny" type="text" required="" ng-model="worker.worker_id" ng-pattern="/^[a-zA-Z0-9]{0,6}$/" aria-required="true">
+      </div>
+      <div ng-class="{ 'usa-input-error': workerForm.$submitted && (workerForm.work_classification.$invalid || workerForm.custom_classification.$invalid)}">
+        <label for="work_classification">Work classification</label>
+        <span class="usa-input-error-message" ng-show="workerForm.$submitted && (workerForm.work_class.$invalid)" id="input-error-message" role="alert">Please enter a work classification</span>
+        <!--<select name="employee" id="work_classification" ng-model="worker.work_class" ng-init="worker.work_class" ng-options="class.work_code as class.work_code + (class.approved?' - Approved':' - Unapproved') for class in classes track by class.work_code">
+        </select>-->
+        <input type="text" class="typeahead"
+          sf-typeahead name="work_classification" id="work_classification"
+          datasets="work_class_dataset" allow-custom="false"
+          ng-model="worker.work_class_selected" editable="editable"
+          ng-required="!worker.work_class_custom"/>
+        <div id="rates-fringes" data-height="100" ng-if="!worker.work_class_custom && worker.work_class_selected">
+          <p>Davis-Bacon prevailing wage: <span class="text-emphasize" id="db-wage"></span></p>
+          <ul>
+            <li>Hourly rate: <span class="text-emphasize" id="rate">{{worker.work_class_selected.rate | currency}}</span></li>
+            <li>Fringes: <span class="text-emphasize" id="fringes">{{worker.work_class_selected.fringe | currency}}</span></li>
+          </ul>
+        </div>
+        <div class="optional-info" data-height="150">
+          <label for="custom_classification">
+          <a class="add-link" id="add-classification" href="#" ng-click="customClassPanel = !customClassPanel;">+ Add custom work classification</a>
+          </label>
+          <div class="" ng-show="customClassPanel">
+            <input id="custom_classification" name="custom_classification" ng-model="worker.work_class_custom" type="text" ng-required="!worker.work_class_selected">
+            <fieldset class="usa-fieldset-inputs fieldset-inputs-owner">
+              <input id="owner" type="checkbox" name="owner" value="owner" checked="" ng-model="worker.business_owner">
+              <label for="owner">This worker is the business owner</label>
+              <p><em>Business owners need only to include their name, work classification including "owner," and daily total hours worked.</em></p>
+            </fieldset>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+
+    <hr/>
+
+    <fieldset>
+      <legend class="usa-drop_text">Hours and rates: STRAIGHT TIME</legend>
+      <div class="form_group-rate">
+        <div class="form_group-rate-item">
+          <label for="day_sunday">Sun.</label>
+          <input aria-labelledby="day_sunday" class="usa-form-control" id="day_sunday" name="worker_reg1" ng-model="worker.reg1" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="day_monday">Mon.</label>
+          <input aria-labelledby="day_monday" class="usa-form-control" id="day_monday" name="worker_reg2" ng-model="worker.reg2" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="day_tuesday">Tue.</label>
+          <input aria-labelledby="day_tuesday" class="usa-form-control" id="day_tuesday" name="worker_reg3" ng-model="worker.reg3" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="day_wednesday">Wed.</label>
+          <input aria-labelledby="day_wednesday" class="usa-form-control" id="day_wednesday" name="worker_reg4" ng-model="worker.reg4" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="day_thursday">Thu.</label>
+          <input aria-labelledby="day_thursday" class="usa-form-control" id="day_thursday" name="worker_reg5" ng-model="worker.reg5" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="day_friday">Fri.</label>
+          <input aria-labelledby="day_friday" class="usa-form-control" id="day_friday" name="worker_reg6" ng-model="worker.reg6" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="day_saturday">Sat.</label>
+          <input aria-labelledby="day_saturday" class="usa-form-control" id="day_saturday" name="worker_reg7" ng-model="worker.reg7" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item form_group-rate-total">
+          <label class="label-straight" for="straightHours">Total straight hrs</label>
+          <input aria-labelledby="straightHours" class="usa-form-control" id="straightHours" name="straightHours" ng-model="straightHours" type="number" value="">
+        </div>
+      </div>
+      <div class="form_group-rate">
+        <div class="form_group-rate-item form_group-rate-rate">
+          <label for="straight-rate" class="label-straight">Hourly rate</label>
+          <input aria-labelledby="straight-rate" class="usa-form-control" id="straight-rate" name="straight_rate" ng-model="worker.rate_reg" type="number" min="0" value="">
+          <p class="error-message"></p>
+        </div>
+        <div class="form_group-rate-item form_group-rate-fringe form_group-rate-fringe-hourly">
+          <label for="straight-fringe" class="label-straight">Hourly fringe (cash)</label>
+          <input aria-labelledby="straight-fringe" class="usa-form-control" id="straight-fringe" name="straight-fringe" ng-model="worker.fringe_cash" type="number" min="0" value="">
+        </div>
+        <div class="form_group-rate-item form_group-rate-fringe">
+          <label for="hourly-fringe" class="label-straight">Hourly fringe (employer paid)</label>
+          <input aria-labelledby="hourly-fringe" class="usa-form-control" id="hourly-fringe" name="straight-fringe" ng-model="worker.fringe_benefits" type="number" min="0" value="">
+        </div>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend class="usa-drop_text">Hours and rates: OVERTIME</legend>
+      <div class="form_group-rate">
+        <div class="form_group-rate-item">
+          <label for="ot_day_sunday">Sun.</label>
+          <input aria-labelledby="ot_day_sunday" class="usa-form-control" id="ot_day_sunday" name="worker_ot1" ng-model="worker.ot1" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="ot_day_monday">Mon.</label>
+          <input aria-labelledby="ot_day_monday" class="usa-form-control" id="ot_day_monday" name="worker_ot2" ng-model="worker.ot2" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="ot_day_tuesday">Tue.</label>
+          <input aria-labelledby="ot_day_tuesday" class="usa-form-control" id="ot_day_tuesday" name="worker_ot3" ng-model="worker.ot3" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="ot_day_wednesday">Wed.</label>
+          <input aria-labelledby="ot_day_wednesday" class="usa-form-control" id="ot_day_wednesday" name="worker_ot4" ng-model="worker.ot4" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="ot_day_thursday">Thu.</label>
+          <input aria-labelledby="ot_day_thursday" class="usa-form-control" id="ot_day_thursday" name="worker_ot5" ng-model="worker.ot5" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="ot_day_friday">Fri.</label>
+          <input aria-labelledby="ot_day_friday" class="usa-form-control" id="ot_day_friday" name="worker_ot6" ng-model="worker.ot6" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item">
+          <label for="ot_day_saturday">Sat.</label>
+          <input aria-labelledby="ot_day_saturday" class="usa-form-control" id="ot_day_saturday" name="worker_ot7" ng-model="worker.ot7" pattern="([01]?\d|2[0-4])" type="number" min="0" max="24" value="">
+        </div>
+        <div class="form_group-rate-item form_group-rate-total">
+          <label for="ot_total">Total OT hrs</label>
+          <input aria-labelledby="ot_total" class="usa-form-control" id="ot_total" name="overtimeHours" ng-model="overtimeHours" type="number" value="">
+        </div>
+      </div>
+      <div class="form_group-rate">
+        <div class="form_group-rate-item form_group-rate-rate">
+          <label for="ot-rate" class="label-straight">Hourly OT rate</label>
+          <input aria-labelledby="ot-rate" class="usa-form-control" id="ot-rate" name="worker_ot_rate" ng-model="worker.rate_ot" type="number" min="0" value="">
+        </div>
+      </div>
+    </fieldset>
+    <worked-hours worker="worker" remove-hours="removeHours"></worked-hours>
+    <fieldset style="margin-top: -5.5rem;">
+      <div class="optional-info">
+        <p class="align-right">
+          <a class="add-link" href="#" ng-click="addAnotherOvertime()">+ Add another overtime rate</a>
+        </p>
+      </div>
+      <div class="form_group-gross" ng-class="{ 'usa-input-error': workerForm.$submitted && workerForm.gross_fed.$invalid }">
+        <label for="gross-federal">Gross earnings: Federal projects</label>
+        <span class="usa-input-error-message" ng-show="workerForm.$submitted && workerForm.gross_fed.$invalid" id="input-error-message" role="alert">Please enter gross earnings from federal projects</span>
+        <input id="gross-federal" name="gross_fed" ng-model="worker.gross_fed" type="number" required="" aria-required="true">
+      </div>
+      <div class="form_group-gross" ng-class="{ 'usa-input-error': workerForm.$submitted && workerForm.gross_tot.$invalid }">
+        <label for="gross-total">Gross earnings: Total</label>
+        <span class="usa-input-error-message" ng-show="workerForm.$submitted && workerForm.gross_tot.$invalid" id="input-error-message" role="alert">Please enter gross earnings all federal and any other projects</span>
+        <input id="gross-total" name="gross_tot" ng-model="worker.gross_tot" type="number" required="" aria-required="true">
+      </div>
+    </fieldset>
+    <hr />
+    <fieldset>
+      <legend>Deductions</legend>
+      <div class="form-group-deductions">
+        <label for="fica">FICA</label>
+        <input id="fica" name="deductions_fica" ng-model="worker.fica" type="number">
+      </div>
+      <div class="form-group-deductions">
+        <label for="withholding-tax">Withholding tax</label>
+        <input id="withholding-tax" name="deductions_taxwh" ng-model="worker.taxwh" type="number">
+      </div>
+
+      <table class="form-group-deductions clear table">
+        <thead>
+          <tr>
+            <th class="deduction">Other</th>
+            <th class="description">Description of other deduction</th>
+            <th class="attachments">Attachments</th>
+            <th class="actions"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="deduction in worker.other_deductions"
+            other-deduction
+              deduction="deduction"
+              index="$index"
+              remove-deduction="removeDeduction"
+              uploader='uploader' />
+        </tbody>
+      </table>
+      <div class="optional-info">
+        <p class="align-right">
+          <a class="add-link" id="add-classification" ng-click="addAnotherDeduction()">+ Add another deduction</a>
+        </p>
+      </div>
+      <h2>Total Deductions: {{getTotalDeductions() | currency}}</h2>
+    </fieldset>
+
+    <hr>
+
+    <div class="net-wages">Net wages paid: <span id="net-wages">{{getNetWagesPaid() | currency}}</span></div>
+    <div ng-if="uploader.isUploading">Please wait, uploading attachments... {{uploader.progress}}%</div>
+    <!--<button type="submit" class="usa-button button-long">+ Upload Attachements</button>-->
+
+    <button type="submit" class="usa-button button-long" ng-click="addAnother=true">+ Add another employee</button>
+    <div class="button_wrapper">
+      <button class="usa-button usa-button-outline" ng-click="workerForm.submit()">Continue</button>
+      <a ng-if="mode==='edit'" class="button-back" ui-sref="payroll.edit.reviews-hours-and-earnings({id: pid, cnum: cnum, org: org})">Go back</a>
+    </div>
+  </form>
+</div>

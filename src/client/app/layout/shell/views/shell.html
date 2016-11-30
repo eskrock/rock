@@ -1,0 +1,7 @@
+<div ng-controller="Shell as vm">
+    <div ng-include="'app/layout/header/views/header.html'" ng-if="!vm.noShell"></div>
+    <section id="main-content">
+      <div ui-view class="shuffle-animation"></div>
+    </section>
+    <div ng-include="'app/layout/footer/views/footer.html'" ng-if="!vm.noShell"></div>
+</div>

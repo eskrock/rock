@@ -1,0 +1,27 @@
+<div class="usa-grid">
+  <h1 class="page-title">{{contracts.organization.name}}</h1>
+      <div class="usa-grid">
+          <div class="usa-width-one-half">
+              <h2 class="subheading">Contact information<!--<span><a ui-sref="profile.edit">Edit</a></span>--></h2>
+              <aside class="company-info-box">
+                  <p><strong>Point of Contact: </strong><span class="company-info-entry">{{contracts.organization.poc}}</span></p>
+                  <p><strong>Email: </strong><span class="company-info-entry">{{contracts.organization.email}}</span></p>
+                  <p><strong>Phone: </strong><span class="company-info-entry">{{contracts.organization.phone}}</span></p>
+                  <p><strong>Fax: </strong><span class="company-info-entry">{{contracts.organization.fax}}</span></p>
+                  <p><strong>Address: </strong><span class="company-info-entry">{{contracts.organization.street}}</span></p>
+              </aside>
+          </div>
+  </div>
+  <hr class="content-break">
+  <div class="usa-grid">
+      <div class="usa-width-one-whole">
+          <h2 class="subheading">Click a contract to view hierarchy and payrolls</h2>
+          <div ng-repeat="c in contracts.contracts" class="usa-width-one-whole">
+                  <div ng-click="fetchDetail(c)" class="contract-button"><span class="contract-number">{{c.num}}</span><span class="contract-name">{{c.title}}</span></div>
+                  <div id="{{'contract-'+c.id }}" class="contract-content usa-width-two-thirds" ng-if="c.active" ng-include="'app/organizations/components/organization-profile/profile-contract-details.html'">
+                  </div>
+          </div>
+      </div>
+
+  </div>
+</div>

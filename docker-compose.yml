@@ -1,0 +1,9 @@
+version: '2'
+services:
+  nginx:
+    build:
+      context: .
+    image: cpa-nginx
+    container_name: cpa-nginx-container
+    ports:
+      - "8082:8082"
