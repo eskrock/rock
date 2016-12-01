@@ -6,8 +6,7 @@
     "asdf"
   ],
   "license": "MIT",
-  "repository": {
-  },
+  "repository": {},
   "scripts": {
     "dev": "gulp serve-dev",
     "init": "npm install",
@@ -34,6 +33,7 @@
     "chai": "^3.5.0",
     "chai-as-promised": "^5.3.0",
     "chalk": "^1.0.0",
+    "codeclimate-test-reporter": "^0.4.0",
     "compass-importer": "^0.4.1",
     "dateformat": "^1.0.8-1.2.3",
     "debug": "^2.1.3",
