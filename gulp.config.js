@@ -162,6 +162,8 @@ module.exports = function() {
                 bowerFiles,
                 config.specHelpers,
                 clientApp + '**/*.module.js',
+                // clientApp + './src/client/app/blocks/**.*.js',
+                // clientApp + './src/client/app/core/**.*.js',
                 clientApp + '**/*.js',
                 temp + config.templateCache.file,
                 config.serverIntegrationSpecs
