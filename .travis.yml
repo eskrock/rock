@@ -13,7 +13,7 @@ before_install:
 script:
   - npm install
   - bower install
-  - gulp test 
+  # - gulp test
 
 cache:
   directories:
@@ -22,4 +22,4 @@ cache:
 
 notifications:
   email:
-    - wardbell@hotmail.com
+    - eskinderget@gmail.com
